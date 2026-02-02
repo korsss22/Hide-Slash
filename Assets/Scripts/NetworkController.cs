@@ -43,10 +43,6 @@ public class NetworkController : Singleton<NetworkController>
     private void OnDestroy() {
         SteamMatchmaking.OnLobbyEntered -= OnLobbyEntered;
         SteamFriends.OnGameLobbyJoinRequested -= OnLobbyJoinRequested;
-
-        if (SteamClient.IsValid) {
-            SteamClient.Shutdown();
-        }
     }
 
     private async void CreateLobby(int maxPlayer) {
@@ -104,10 +100,16 @@ public class NetworkController : Singleton<NetworkController>
 
         GameManager.Instance.EnterLockState(LockState.LOCKED);
 
-        UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Create Lobby Invoked");
+        //UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Create Lobby Invoked");
     }
 
     public void OnClientButtonClicked() { //when client jump in to the lobby by entering lobbyId.
         UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Entering the lobby...");
+    }
+
+    private void OnApplicationQuit() {
+        if (SteamClient.IsValid) {
+            SteamClient.Shutdown();
+        }
     }
 }

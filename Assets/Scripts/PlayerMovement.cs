@@ -21,7 +21,6 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] int maxSlideCount = 7;
     private Vector3 bodyCenter;
     private float jumpForce = 4f;
-    private float radiusOffset = 0.2f;
 
     private Player player;
     private Rigidbody rb;
@@ -118,12 +117,15 @@ public class PlayerMovement : NetworkBehaviour
     }
     
     void OnMove(InputValue value) {
+        Debug.Log(GameManager.Instance.IsMouseLocked);
         if (!GameManager.Instance.IsMouseLocked) return;
+        if (!isLocalPlayer) return;
         inputVec = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value) {
         if (!GameManager.Instance.IsMouseLocked) return;
+        if (!isLocalPlayer) return;
         bool isPress = value.isPressed;
 
         if (isGround() && isPress) {
@@ -134,6 +136,8 @@ public class PlayerMovement : NetworkBehaviour
 
     void OnSprint(InputValue value) {
         if (!GameManager.Instance.IsMouseLocked) return;
+        if (!isLocalPlayer) return;
+
         bool isPress = value.isPressed;
         nowSpeed = walkSpeed;
         if (isPress) {
@@ -151,6 +155,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     private void OnDrawGizmos() {
+        if (player == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, 0.4f);
 
@@ -161,26 +166,26 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     void DrawCapsuleGizmo(
-    Vector3 center,
-    float height,
-    float radius,
-    Color color
-) {
-    Gizmos.color = color;
+        Vector3 center,
+        float height,
+        float radius,
+        Color color
+    ) {
+        Gizmos.color = color;
 
-    float halfHeight = height * 0.5f - radius;
+        float halfHeight = height * 0.5f - radius;
 
-    Vector3 top    = center + Vector3.up * halfHeight;
-    Vector3 bottom = center - Vector3.up * halfHeight;
+        Vector3 top    = center + Vector3.up * halfHeight;
+        Vector3 bottom = center - Vector3.up * halfHeight;
 
-    // 위 / 아래 반구
-    Gizmos.DrawWireSphere(top, radius);
-    Gizmos.DrawWireSphere(bottom, radius);
+        // 위 / 아래 반구
+        Gizmos.DrawWireSphere(top, radius);
+        Gizmos.DrawWireSphere(bottom, radius);
 
-    // 옆선 (4방향)
-    Gizmos.DrawLine(top + Vector3.forward * radius, bottom + Vector3.forward * radius);
-    Gizmos.DrawLine(top + Vector3.back    * radius, bottom + Vector3.back    * radius);
-    Gizmos.DrawLine(top + Vector3.left    * radius, bottom + Vector3.left    * radius);
-    Gizmos.DrawLine(top + Vector3.right   * radius, bottom + Vector3.right   * radius);
-}
+        // 옆선 (4방향)
+        Gizmos.DrawLine(top + Vector3.forward * radius, bottom + Vector3.forward * radius);
+        Gizmos.DrawLine(top + Vector3.back    * radius, bottom + Vector3.back    * radius);
+        Gizmos.DrawLine(top + Vector3.left    * radius, bottom + Vector3.left    * radius);
+        Gizmos.DrawLine(top + Vector3.right   * radius, bottom + Vector3.right   * radius);
+    }
 }

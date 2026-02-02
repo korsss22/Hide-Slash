@@ -21,8 +21,6 @@ public class PlayerCamera : NetworkBehaviour
     [SerializeField] private float maxDistance = 15f;
     [Range(1f,15f)]
     [SerializeField] private float defaultDistance = 5f;
-    private float horizontalAxis = 0f;
-    private float verticalAxis = 0f;
     private float yaw = 0f;
     private float nowDis = 0;
 
@@ -35,12 +33,6 @@ public class PlayerCamera : NetworkBehaviour
         nowDis = defaultDistance;
     }
 
-    private void Update() {
-        if (!GameManager.Instance.IsMouseLocked) {
-            
-        }
-    }
-
     void OnScrollWheel(InputValue value) {
         if (GameManager.Instance.IsMouseLocked) return;
         Vector2 wheel = value.Get<Vector2>();
@@ -49,6 +41,7 @@ public class PlayerCamera : NetworkBehaviour
 
     //TODO : Fix Camera and rotate player transform
     void OnLook(InputValue value) {
+        if (!isLocalPlayer) return;
         Vector2 mouse = value.Get<Vector2>();
 
         yaw += mouse.x * sensitivity;
@@ -87,6 +80,7 @@ public class PlayerCamera : NetworkBehaviour
 
     // Invoke after Start
     public override void OnStartLocalPlayer() {
+        base.OnStartLocalPlayer();
         virtualCam = GameObject.FindGameObjectWithTag("Cinemachine").transform;
         vCamera = virtualCam.gameObject.GetComponent<CinemachineCamera>();
         freeLook = virtualCam.gameObject.GetComponent<CinemachineOrbitalFollow>();
@@ -99,7 +93,11 @@ public class PlayerCamera : NetworkBehaviour
             vCamera.LookAt = camPivot;
         }
         
+        PlayerInput input = player.gameObject.GetComponent<PlayerInput>();
 
-        player.gameObject.GetComponent<PlayerInput>().enabled = true;
+        input.enabled = true;
+        input.ActivateInput();
+
+        GameManager.Instance.EnterLockState(LockState.LOCKED);
     }
 }

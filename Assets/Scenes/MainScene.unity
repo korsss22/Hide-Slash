@@ -921,7 +921,7 @@ MonoBehaviour:
   editorAutoStart: 0
   sendRate: 60
   offlineScene: Assets/Scenes/MainScene.unity
-  onlineScene: Assets/Scenes/Map.unity
+  onlineScene: Assets/Scenes/TestScene.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 935633674}
   networkAddress: localhost

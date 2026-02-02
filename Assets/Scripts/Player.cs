@@ -17,6 +17,7 @@ public class Player : NetworkBehaviour
     private Mesh originalMesh;
     private Material originalMaterial;
     public bool isCollision = false;
+    [SyncVar(hook = nameof(OnTransformChanged))]
     public bool isTransformed = false;
 
     private void Awake() {
@@ -33,14 +34,18 @@ public class Player : NetworkBehaviour
 
         playerMove.Init(this);
         playerCamera.Init(this);
-        transformSystem.Init(this);
+        //transformSystem.Init(this);
     }
 
     public void OnInteract(InputValue value) {
-        if (isTransformed) {
-            transformSystem.RevertTransform(value);
+        //transformSystem.CmdTransform();
+    }
+
+    private void OnTransformChanged(bool oldValue, bool newValue) {
+        if (!newValue) {
+            //transformSystem.Transform();
         } else {
-            transformSystem.Transform(value);
+            //transformSystem.RevertTransform();
         }
     }
 }

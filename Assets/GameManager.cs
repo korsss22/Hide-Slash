@@ -20,6 +20,15 @@ public class GameManager : Singleton<GameManager>
             else return false;
         }
     }
+
+    private void Update() {
+        if (Instance == null) {
+            Debug.LogWarning("GameManager Instance is null");
+        } else {
+            Debug.LogWarning("GameManager Instance is not null");
+        }
+    }
+
     private Stack<LockState> mouseLockStack = new();
         
     protected override void Awake() {
