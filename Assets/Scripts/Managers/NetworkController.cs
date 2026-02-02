@@ -1,11 +1,8 @@
 using Mirror;
-using TMPro;
 using UnityEngine;
 using Steamworks;
 using Steamworks.Data;
 using Mirror.FizzySteam;
-using UnityEngine.Rendering;
-using System;
 
 public class NetworkController : Singleton<NetworkController>
 {

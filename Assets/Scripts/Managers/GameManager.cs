@@ -3,7 +3,8 @@ using UnityEditor;
 using UnityEngine;
 
 public enum GameState {
-
+    MAIN_MENU,
+    PLAYING
 }
 
 public enum LockState {
@@ -13,10 +14,17 @@ public enum LockState {
 
 public class GameManager : Singleton<GameManager>
 {
-    public LockState CurrentState { get; private set; }
+    public GameState CurrentGameState { get; private set; }
+    public LockState CurrentLockState { get; private set; }
+    public Dictionary<GameState, LockState> MouseLockWhen = new() {
+        {GameState.MAIN_MENU, LockState.UNLOCKED},
+        {GameState.PLAYING, LockState.LOCKED}
+    };
+    private Stack<LockState> mouseLockStack = new();
+
     public bool IsMouseLocked { 
         get {
-            if (CurrentState == LockState.LOCKED) return true;
+            if (CurrentLockState == LockState.LOCKED) return true;
             else return false;
         }
     }
@@ -29,16 +37,19 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private Stack<LockState> mouseLockStack = new();
-        
     protected override void Awake() {
         base.Awake();
+        EnterGameState(GameState.MAIN_MENU);
         EnterLockState(LockState.UNLOCKED);
+    }
+
+    public void EnterGameState(GameState nowState) {
+        CurrentGameState = nowState;
     }
 
     public void EnterLockState(LockState nowState) {
         mouseLockStack.Push(nowState);
-        CurrentState = nowState;
+        CurrentLockState = nowState;
         SetMouseLockByState();
     }
 
@@ -46,7 +57,7 @@ public class GameManager : Singleton<GameManager>
     if (mouseLockStack.Count > 0)
         mouseLockStack.Pop();
 
-        CurrentState = mouseLockStack.Count > 0 ? mouseLockStack.Peek() : LockState.UNLOCKED;
+        CurrentLockState = mouseLockStack.Count > 0 ? mouseLockStack.Peek() : LockState.UNLOCKED;
         SetMouseLockByState();
     }
 

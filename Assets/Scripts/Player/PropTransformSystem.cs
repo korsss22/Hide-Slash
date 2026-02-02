@@ -13,6 +13,7 @@ public class PropTransformSystem : NetworkBehaviour
     public void Transform() { //Its local yet
         player.Mesh.gameObject.SetActive(false);
         transformedObj = Instantiate(nearestObj, player.transform);
+        
         PropUtil.SetPropLayerInChildren(transformedObj, LayerMask.NameToLayer("Prop"));
 
         Collider[] cols = transformedObj.GetComponentsInChildren<Collider>();
@@ -21,12 +22,22 @@ public class PropTransformSystem : NetworkBehaviour
             col.enabled = false;
         }
         transformedObj.transform.localPosition = new Vector3(0,0,0);
+        if (isServer) NetworkServer.Spawn(transformedObj);
     }
     public void RevertTransform() {
         Destroy(transformedObj);
         player.isTransformed = false;
         player.Mesh.gameObject.SetActive(true);
     }
+
+    [Command]
+    public void CmdTransform() {
+        Debug.Log("Transform");
+        player.isTransformed = true;
+        Transform();
+    }
+
+
 
     public GameObject GetNearestObj(List<GameObject> objs)
     {
