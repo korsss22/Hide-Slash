@@ -86,12 +86,17 @@ public class NetworkController : Singleton<NetworkController>
         }
         else
         {
+            manager.networkAddress = hostSteamId;
             manager.StartClient();
         }
     }
 
-    private void OnLobbyJoinRequested(Lobby lobby, SteamId steamId) {
-        lobby.Join();
+    private async void OnLobbyJoinRequested(Lobby lobby, SteamId steamId) {
+        RoomEnter enter = await lobby.Join();
+        if (enter != RoomEnter.Success)
+        {
+            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Failed to join lobby");
+        }
     }
 
     public void OnHostButtonClicked() {
