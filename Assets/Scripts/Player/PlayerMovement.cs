@@ -120,24 +120,23 @@ public class PlayerMovement : NetworkBehaviour
 
 /*-------------------PlayerInput Callbacks---------------------*/
     
-    void OnMove(InputValue value) {
+    public void OnMove(InputAction.CallbackContext context) {
         Debug.Log(isLocalPlayer);
         if (!isLocalPlayer) return;
-        inputVec = value.Get<Vector2>();
+        inputVec = context.ReadValue<Vector2>();
     }
 
-    void OnSprint(InputValue value) {
+    public void OnSprint(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
 
-        bool isPress = value.isPressed;
-        
+        bool isPress = context.ReadValue<float>() > 0.5f;        
         nowSpeed = isPress ? sprintSpeed : walkSpeed;
     }
 
-    void OnJump(InputValue value) {
+    public void OnJump(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
         
-        bool isPress = value.isPressed;
+        bool isPress = context.ReadValue<float>() > 0.5f;
 
         if (Utils.IsGround(transform.position, mapLayer) && isPress) {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);

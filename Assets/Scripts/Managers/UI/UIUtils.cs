@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -18,29 +19,35 @@ public struct DebugData {
 
 public class UIUtils : Singleton<UIUtils>
 {
-    [SerializeField] private DebugConsole debugConsole = null; 
-    [SerializeField] private PausePanel pausePanel = null;   
+    [SerializeField] private DebugConsole DebugConsole = null; 
+    [SerializeField] private PausePanel PausePanel = null;   
+    [SerializeField] private HoldInteractionUI HoldInteractionUI = null;
 
     override protected void Awake() {
         base.Awake();
 
-        if (debugConsole == null) {
+        if (DebugConsole == null) {
             Debug.LogError("debugConsole Load failed!");
             return;
         }
 
-        if (pausePanel == null) {
+        if (PausePanel == null) {
             Debug.LogError("pausePanel Load failed!");
+            return;
+        }
+
+        if (HoldInteractionUI == null) {
+            Debug.LogError("holdInteractionUI Load failed!");
             return;
         }
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (pausePanel.gameObject.activeSelf) {
-                CloseUI(pausePanel.gameObject);
+            if (PausePanel.gameObject.activeSelf) {
+                CloseUIWithLock(PausePanel.gameObject);
             } else {
-                PopUI(pausePanel.gameObject, LockState.UNLOCKED);
+                PopUIWithUnlock(PausePanel.gameObject, LockState.UNLOCKED);
             }
         }
     }
@@ -55,9 +62,9 @@ public class UIUtils : Singleton<UIUtils>
         "Alert" : type == DEBUG_TYPE.WARNING
         ? "Warning" : "Error";
 
-        debugConsole.debugQueue.Enqueue(new DebugData{title = title, content = content});
-        if (!debugConsole.isShowing) {
-            debugConsole.Show();
+        DebugConsole.debugQueue.Enqueue(new DebugData{title = title, content = content});
+        if (!DebugConsole.isShowing) {
+            DebugConsole.Show();
         }
     }
 
@@ -69,13 +76,19 @@ public class UIUtils : Singleton<UIUtils>
         Instance.PrintInternal(type, content);
     }
 
-    public static void PopUI(GameObject obj, LockState lockState) {
+    public static void PopUIWithUnlock(GameObject obj, LockState lockState) {
         GameManager.Instance.EnterLockState(lockState);
         obj.SetActive(true);
     }
 
-    public static void CloseUI(GameObject obj) {
+    public static void CloseUIWithLock(GameObject obj) {
         GameManager.Instance.ExitLockState();
         obj.SetActive(false);
+    }
+
+    public static HoldInteractionUI GetHoldUI(Action onLoaded = null) {
+        HoldInteractionUI holdUI = Instance.HoldInteractionUI;
+        holdUI.onHoldComplete = onLoaded;
+        return holdUI;
     }
 }

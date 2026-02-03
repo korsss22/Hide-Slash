@@ -2,42 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System;
+using UnityEngine.InputSystem;
 
 public class PropTransformSystem : NetworkBehaviour
 {
     [SerializeField] private Player player;
+    private HoldInteractionUI holdUI;
     private GameObject transformedObj = null;
     public GameObject nearestObj = null;
     public event Action<GameObject> OnNearestObjectChanged;
 
-    public void Transform() { //Its local yet
-        player.Mesh.gameObject.SetActive(false);
-        transformedObj = Instantiate(nearestObj, player.transform);
-        
-        PropUtil.SetPropLayerInChildren(transformedObj, LayerMask.NameToLayer("Prop"));
-
-        Collider[] cols = transformedObj.GetComponentsInChildren<Collider>();
-        foreach (Collider col in cols)
-        {
-            col.enabled = false;
-        }
-        transformedObj.transform.localPosition = new Vector3(0,0,0);
-        if (isServer) NetworkServer.Spawn(transformedObj);
+    void Awake()
+    {
+        holdUI = UIUtils.GetHoldUI(OnCompleteHold);
     }
-    public void RevertTransform() {
-        Destroy(transformedObj);
-        player.isTransformed = false;
-        player.Mesh.gameObject.SetActive(true);
-    }
-
-    [Command]
-    public void CmdTransform() {
-        Debug.Log("Transform");
-        player.isTransformed = true;
-        Transform();
-    }
-
-
 
     public GameObject GetNearestObj(List<GameObject> objs)
     {
@@ -83,5 +61,18 @@ public class PropTransformSystem : NetworkBehaviour
         nearestObj = newNearestObj;
         OnNearestObjectChanged?.Invoke(newNearestObj);
         return;
+    }
+
+    public void OnInteract(InputAction.CallbackContext context) {
+        if (nearestObj == null) return;
+        
+        if (context.started) holdUI.StartHold();
+        else if (context.performed) holdUI.CompleteHold();
+        else if (context.canceled) holdUI.CancelHold();
+    }
+
+    public void OnCompleteHold()
+    {
+        Debug.Log("Hold Interaction Complete");
     }
 }

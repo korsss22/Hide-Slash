@@ -54,10 +54,10 @@ public class PlayerCamera : NetworkBehaviour
 
 /*----------------Camera Callback----------------*/
 
-    void OnScrollWheel(InputValue value) {
+    public void OnScrollWheel(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
 
-        Vector2 wheel = value.Get<Vector2>();
+        Vector2 wheel = context.ReadValue<Vector2>();
         MoveCam(wheel);
     }
 
@@ -87,10 +87,10 @@ public class PlayerCamera : NetworkBehaviour
         }
     }
 
-    void OnLook(InputValue value) {
+    public void OnLook(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
 
-        Vector2 mouse = value.Get<Vector2>();
+        Vector2 mouse = context.ReadValue<Vector2>();
         yaw += mouse.x * sensitivity;
         if (Input.GetKey(KeyCode.LeftAlt)) {
             player.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);

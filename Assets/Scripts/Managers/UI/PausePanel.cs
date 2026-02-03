@@ -12,7 +12,7 @@ public class PausePanel : MonoBehaviour
     }
 
     void OnResumeButtonClicked() {
-        UIUtils.CloseUI(gameObject);
+        UIUtils.CloseUIWithLock(gameObject);
     }
 
     void OnExitButtonClicked() {

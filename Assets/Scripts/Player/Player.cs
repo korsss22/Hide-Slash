@@ -13,7 +13,7 @@ public class Player : NetworkBehaviour
     public Transform collision;
     public Transform Mesh;
     public bool isOnCollision = false;
-    [SyncVar(hook = nameof(OnTransformChanged))] public bool isTransformed = false;
+    public bool isTransformed = false;
 
     private void Awake() {
         playerMovement = GetComponent<PlayerMovement>();
@@ -22,13 +22,5 @@ public class Player : NetworkBehaviour
 
         playerMovement.Init(this);
         playerCamera.Init(this);
-    }
-
-    public void OnInteract(InputValue value) {
-        transformSystem.CmdTransform();
-    }
-
-    private void OnTransformChanged(bool oldValue, bool newValue) {
-        transformSystem.Transform();
     }
 }
