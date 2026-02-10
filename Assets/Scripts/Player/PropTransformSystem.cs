@@ -73,6 +73,6 @@ public class PropTransformSystem : NetworkBehaviour
 
     public void OnCompleteHold()
     {
-        Debug.Log("Hold Interaction Complete");
+        Debug.Log("Hold Interaction Complete. Nearest Object Id: " + nearestObj.GetComponent<PropParent>().propID);
     }
 }

@@ -22,7 +22,6 @@ public class HoldInteractionUI : MonoBehaviour
 
         currentHoldTime += Time.deltaTime;
         holdCircle.fillAmount = currentHoldTime / holdTime;
-        Debug.Log(holdCircle.fillAmount);
     }
 
     public void StartHold()
