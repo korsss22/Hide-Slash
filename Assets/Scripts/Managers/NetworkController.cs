@@ -10,6 +10,7 @@ public class NetworkController : Singleton<NetworkController>
     private FizzyFacepunch fizzy;
     private const string HOST_ADDRESS = "hostAddress";
     private Lobby? currentLobby;
+    public static float progress { get; private set; } = 0f;
 
     protected override void Awake() {
         base.Awake();
@@ -45,6 +46,7 @@ public class NetworkController : Singleton<NetworkController>
     private async void CreateLobby(int maxPlayer) {
         currentLobby = await SteamMatchmaking.CreateLobbyAsync(maxPlayer);
 
+
         if (!currentLobby.HasValue) {
             UIUtils.PrintUI(DEBUG_TYPE.ERROR, "failed to create lobby...");
             return;
@@ -55,6 +57,7 @@ public class NetworkController : Singleton<NetworkController>
         currentLobby?.SetJoinable(true);
 
         currentLobby?.SetData(HOST_ADDRESS, SteamClient.SteamId.ToString());
+
     }
 
     private void OnLobbyEntered(Lobby lobby)
@@ -67,24 +70,26 @@ public class NetworkController : Singleton<NetworkController>
         //     lobby.Leave();
         //     return;
         // }
-
         string hostSteamId = lobby.GetData(HOST_ADDRESS);
 
         fizzy.SteamUserID = SteamClient.SteamId;
 
         if (hostSteamId == SteamClient.SteamId.ToString())
-        {
+        {   
             manager.StartHost();
+            UIUtils.StartLoadingBar();
         }
         else
         {
             manager.networkAddress = hostSteamId;
             manager.StartClient();
+            UIUtils.StartLoadingBar();
         }
     }
 
     private async void OnLobbyJoinRequested(Lobby lobby, SteamId steamId) {
         RoomEnter enter = await lobby.Join();
+
         if (enter != RoomEnter.Success)
         {
             UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Failed to join lobby");
@@ -107,5 +112,11 @@ public class NetworkController : Singleton<NetworkController>
         if (SteamClient.IsValid) {
             SteamClient.Shutdown();
         }
+    }
+
+    public float GetSceneProgress() {
+        AsyncOperation async = NetworkManager.loadingSceneAsync;
+        if (async == null) return 0f;
+        return async.progress; 
     }
 }
