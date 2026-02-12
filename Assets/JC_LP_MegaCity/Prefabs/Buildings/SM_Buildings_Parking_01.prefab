@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 890026163146846629}
   - component: {fileID: 58140093378257463}
   - component: {fileID: 77125385695035007}
-  - component: {fileID: 4994087376123975622}
+  - component: {fileID: -4923914117316803892}
   m_Layer: 8
   m_Name: SM_Buildings_Parking_01
   m_TagString: Untagged
@@ -90,8 +90,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4994087376123975622
-MeshCollider:
+--- !u!65 &-4923914117316803892
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,10 +108,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7263686583578615839, guid: c50ad4db07f6bc24fa4b735b3be06af6, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 30.932589, y: 15.681339, z: 39.903107}
+  m_Center: {x: 15.001128, y: 7.8279095, z: -19.443825}
 --- !u!1 &3362994898135295526
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2247673763438600832}
   - component: {fileID: 5503475098151228534}
   - component: {fileID: 8835161660242549833}
-  - component: {fileID: 7921231995759908839}
+  - component: {fileID: -2565079449201405420}
   m_Layer: 8
   m_Name: SM_Floor_Tile_10
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7921231995759908839
-MeshCollider:
+--- !u!65 &-2565079449201405420
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,7 +105,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 847782823486882355, guid: 124e4b9c2d72c0947b6b4384b17594a6, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 40.001, y: 0.0000017471611, z: 40.001}
+  m_Center: {x: 0, y: 0.049999125, z: -20.0005}

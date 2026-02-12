@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6312961588443573363}
   - component: {fileID: 8633426830197081946}
   - component: {fileID: 7402550604583760605}
-  - component: {fileID: 399057665542596777}
+  - component: {fileID: -1100876503730090702}
   m_Layer: 8
   m_Name: SM_Buildings_Library_01
   m_TagString: Untagged
@@ -198,8 +198,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &399057665542596777
-MeshCollider:
+--- !u!65 &-1100876503730090702
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -216,10 +216,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4461976020838571639, guid: 315caf29b7beb2e47a13c5c33e3d1a4e, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 20, y: 19.08492, z: 25.900833}
+  m_Center: {x: -0.00008106232, y: 9.518708, z: 3.027452}
 --- !u!1 &5829594696052481535
 GameObject:
   m_ObjectHideFlags: 0

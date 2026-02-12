@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2167106387593258233}
   - component: {fileID: 2455176891299940806}
   - component: {fileID: 7234394497245926702}
-  - component: {fileID: 798369341294049394}
+  - component: {fileID: 7996883190408071892}
   m_Layer: 8
   m_Name: SM_Buildings_Gas_Station_01
   m_TagString: Untagged
@@ -202,8 +202,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &798369341294049394
-MeshCollider:
+--- !u!65 &7996883190408071892
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -220,10 +220,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2225584924179927796, guid: 4d4befd8d8d249747902abb9d4f42095, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 28.058603, y: 6.777925, z: 10.237519}
+  m_Center: {x: 0, y: 3.3889558, z: -6.61476}
 --- !u!1 &5914165751047500323
 GameObject:
   m_ObjectHideFlags: 0

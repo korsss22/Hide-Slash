@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8683264840084450333}
   - component: {fileID: 360698742720223134}
   - component: {fileID: 2237918292015683244}
-  - component: {fileID: 5859892846095683820}
+  - component: {fileID: -6518451653164388917}
   m_Layer: 8
   m_Name: SM_Buildings_Port_04
   m_TagString: Untagged
@@ -88,8 +88,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5859892846095683820
-MeshCollider:
+--- !u!65 &-6518451653164388917
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,10 +106,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1822401762427480006, guid: 94f0b447f09a8d04ea487bc141ba4a96, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 39.34645, y: 30.56842, z: 18.657207}
+  m_Center: {x: -3.4452753, y: 15.272343, z: 1.2877941}
 --- !u!1 &8318330045540538670
 GameObject:
   m_ObjectHideFlags: 0

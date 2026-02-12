@@ -9460,6 +9460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a39f945648c2b4281f88b8b969f8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propID: 0
 --- !u!1001 &74596288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174273,6 +174274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Nature_Landscape_06
       objectReference: {fileID: 0}
+    - target: {fileID: 4524590945369304619, guid: 29052f1ac9b57b047881c6f07908734f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -286840,6 +286845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a39f945648c2b4281f88b8b969f8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propID: 0
 --- !u!1001 &2093023441
 PrefabInstance:
   m_ObjectHideFlags: 0

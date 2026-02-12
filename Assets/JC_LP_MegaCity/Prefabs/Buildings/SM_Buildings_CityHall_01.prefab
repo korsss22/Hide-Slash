@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 4381738414878224930}
   - component: {fileID: 2794155135263629588}
   - component: {fileID: 6398969295630087026}
-  - component: {fileID: 4815826744290224615}
+  - component: {fileID: 536317439261060712}
   m_Layer: 8
   m_Name: SM_Buildings_CityHall_01
   m_TagString: Untagged
@@ -308,8 +308,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4815826744290224615
-MeshCollider:
+--- !u!65 &536317439261060712
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -326,7 +326,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -732578574654448530, guid: 000210b19e4c6ff4d829e26366b144eb, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 23.241293, y: 22.293108, z: 25.010796}
+  m_Center: {x: 0, y: 11.126554, z: -0.0070171356}

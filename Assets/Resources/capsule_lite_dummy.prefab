@@ -154,10 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65176326453313d4c94304f3553d8a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   player: {fileID: 8641762789907819450}
+  objDatabase: {fileID: 0}
   nearestObj: {fileID: 0}
 --- !u!114 &790316058748035470
 MonoBehaviour:
@@ -766,7 +764,7 @@ MonoBehaviour:
   collision: {fileID: 2387193653717757083}
   Mesh: {fileID: 7043547059826573957}
   isOnCollision: 0
-  isTransformed: 0
+  transformObjId: -1
 --- !u!114 &4637386185355014359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +785,7 @@ MonoBehaviour:
   walkSpeed: 5
   sprintSpeed: 12
   nowSpeed: 0
-  jumpForce: 4
+  jumpForce: 2
   mapLayer:
     serializedVersion: 2
     m_Bits: 448

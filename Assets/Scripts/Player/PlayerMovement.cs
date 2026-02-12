@@ -43,7 +43,7 @@ public class PlayerMovement : NetworkBehaviour
 
         Vector3 currentPos = CollideAndSlideMove(moveDir);
 
-        bool isTurnable = moveDir.sqrMagnitude > 0.0001f && !player.isTransformed;
+        bool isTurnable = moveDir.sqrMagnitude > 0.0001f && !player.IsTransformed();
 
         if (isTurnable)
         {   
@@ -121,7 +121,6 @@ public class PlayerMovement : NetworkBehaviour
 /*-------------------PlayerInput Callbacks---------------------*/
     
     public void OnMove(InputAction.CallbackContext context) {
-        Debug.Log(isLocalPlayer);
         if (!isLocalPlayer) return;
         inputVec = context.ReadValue<Vector2>();
     }

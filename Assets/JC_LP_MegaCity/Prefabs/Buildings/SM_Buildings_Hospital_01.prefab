@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 2054905819610675267}
   - component: {fileID: 5169689563300870546}
   - component: {fileID: 4342349416746777826}
-  - component: {fileID: 2247419984837153228}
+  - component: {fileID: -6300177045819026404}
   m_Layer: 8
   m_Name: SM_Buildings_Hospital_01
   m_TagString: Untagged
@@ -424,8 +424,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2247419984837153228
-MeshCollider:
+--- !u!65 &-6300177045819026404
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -442,10 +442,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1824838052079322354, guid: 9f0fd1a929ef9ac42a323156ce484017, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 24.394966, y: 16.051413, z: 19.434128}
+  m_Center: {x: -4.277483, y: 7.974292, z: -0.21706438}
 --- !u!1 &4469114407286255102
 GameObject:
   m_ObjectHideFlags: 0

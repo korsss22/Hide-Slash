@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager>
         {GameState.PLAYING, LockState.LOCKED}
     };
     private Stack<LockState> mouseLockStack = new();
+    [SerializeField] PropDatabase database;
 
     public bool IsMouseLocked { 
         get {
@@ -29,16 +30,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void Update() {
-        if (Instance == null) {
-            Debug.LogWarning("GameManager Instance is null");
-        } else {
-            Debug.LogWarning("GameManager Instance is not null");
-        }
-    }
-
     protected override void Awake() {
         base.Awake();
+        PropUtil.Init(database);
         EnterGameState(GameState.MAIN_MENU);
         EnterLockState(LockState.UNLOCKED);
     }

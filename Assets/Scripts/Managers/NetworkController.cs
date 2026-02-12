@@ -51,7 +51,7 @@ public class NetworkController : Singleton<NetworkController>
         }
 
         currentLobby?.SetFriendsOnly(); // refactor to switch
-        currentLobby?.SetData("GameKey", "HideAndSlashJo");
+        //currentLobby?.SetData("GameKey", "HideAndSlashJo");
         currentLobby?.SetJoinable(true);
 
         currentLobby?.SetData(HOST_ADDRESS, SteamClient.SteamId.ToString());
@@ -60,14 +60,13 @@ public class NetworkController : Singleton<NetworkController>
     private void OnLobbyEntered(Lobby lobby)
     {
         lobby.Refresh();
-        string lobbyName = lobby.GetData("GameKey");
-        Debug.Log(lobbyName);
-        if (lobbyName != "HideAndSlashJo")
-        {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Wrong Lobby. Leaving...");
-            lobby.Leave();
-            return;
-        }
+        // string lobbyName = lobby.GetData("GameKey");
+        // if (lobbyName != "HideAndSlashJo")
+        // {
+        //     UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Wrong Lobby. Leaving...");
+        //     lobby.Leave();
+        //     return;
+        // }
 
         string hostSteamId = lobby.GetData(HOST_ADDRESS);
 

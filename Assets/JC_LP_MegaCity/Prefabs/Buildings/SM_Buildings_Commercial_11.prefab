@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4702767503265087891}
   - component: {fileID: 4694876084656342811}
   - component: {fileID: 8594124693983097026}
-  - component: {fileID: 6447985106733391777}
+  - component: {fileID: 807919225876649099}
   m_Layer: 8
   m_Name: SM_Buildings_Commercial_11
   m_TagString: Untagged
@@ -91,8 +91,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6447985106733391777
-MeshCollider:
+--- !u!65 &807919225876649099
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,10 +109,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3411999473997837089, guid: a3d7bcefc2c6f1a42af4e2155c58aa95, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 11.60062, y: 7.4500036, z: 11.55}
+  m_Center: {x: -0.5996895, y: 3.7250009, z: 1.8749996}
 --- !u!1 &7265041228297709204
 GameObject:
   m_ObjectHideFlags: 0

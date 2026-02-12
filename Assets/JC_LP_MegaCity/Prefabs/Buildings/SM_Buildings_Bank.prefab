@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 4376832898281819744}
   - component: {fileID: 1596813507158824567}
   - component: {fileID: 8917670927787821216}
-  - component: {fileID: 6684309391692236539}
+  - component: {fileID: 5456091340770581795}
   m_Layer: 8
   m_Name: SM_Buildings_Bank
   m_TagString: Untagged
@@ -199,8 +199,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6684309391692236539
-MeshCollider:
+--- !u!65 &5456091340770581795
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -217,10 +217,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5328516128646906371, guid: 400f17e5e0d4f664d9314c01cd40a8b5, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 11.25937, y: 12.6887455, z: 11.717607}
+  m_Center: {x: 0, y: 6.3045454, z: 0.22911358}
 --- !u!1 &8672080482289694435
 GameObject:
   m_ObjectHideFlags: 0

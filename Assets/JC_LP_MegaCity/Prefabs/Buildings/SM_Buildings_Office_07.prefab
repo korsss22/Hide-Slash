@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4219625353272060106}
   - component: {fileID: 1216194705917921278}
   - component: {fileID: 7874707535405380755}
-  - component: {fileID: 2003726214102664144}
+  - component: {fileID: -8865402411174655230}
   m_Layer: 8
   m_Name: SM_Buildings_Office_07
   m_TagString: Untagged
@@ -416,8 +416,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2003726214102664144
-MeshCollider:
+--- !u!65 &-8865402411174655230
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -434,10 +434,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2405366634669602364, guid: 0280abb6e998ddc43ae57662d679ad4b, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 10.312089, y: 18.587164, z: 10.186235}
+  m_Center: {x: 0, y: 9.293199, z: 0.20422864}
 --- !u!1 &7600432004590640774
 GameObject:
   m_ObjectHideFlags: 0
