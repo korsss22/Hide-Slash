@@ -16,13 +16,11 @@ public class NetworkController : Singleton<NetworkController>
     private FizzyFacepunch fizzy;
     private const string HOST_ADDRESS = "hostAddress";
     private Lobby? currentLobby;
-<<<<<<< Updated upstream
-    public static float progress { get; private set; } = 0f;
-=======
+
+
     [SerializeField] private TransportType transportType;
     private Action onStartHost;
     private Action onStartClient;
->>>>>>> Stashed changes
 
     protected override void Awake() {
         base.Awake();
@@ -160,31 +158,4 @@ public class NetworkController : Singleton<NetworkController>
             UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Failed to join lobby");
         }
     }
-<<<<<<< Updated upstream
-
-    public void OnHostButtonClicked() {
-        CreateLobby(4);
-
-        GameManager.Instance.EnterLockState(LockState.LOCKED);
-
-        //UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Create Lobby Invoked");
-    }
-
-    public void OnClientButtonClicked() { //when client jump in to the lobby by entering lobbyId.
-        UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Entering the lobby...");
-    }
-
-    private void OnApplicationQuit() {
-        if (SteamClient.IsValid) {
-            SteamClient.Shutdown();
-        }
-    }
-
-    public float GetSceneProgress() {
-        AsyncOperation async = NetworkManager.loadingSceneAsync;
-        if (async == null) return 0f;
-        return async.progress; 
-    }
-=======
->>>>>>> Stashed changes
 }
