@@ -16,6 +16,9 @@ public class NetworkController : Singleton<NetworkController>
     private FizzyFacepunch fizzy;
     private const string HOST_ADDRESS = "hostAddress";
     private Lobby? currentLobby;
+    [SerializeField] private TransportType transportType;
+    private Action onStartHost;
+    private Action onStartClient;
 
 
     [SerializeField] private TransportType transportType;
