@@ -10,11 +10,14 @@ public class PropOutliner : NetworkBehaviour
     private PropTransformSystem transformSystem;
     [SerializeField] private List<GameObject> hitObjs = new();
     private GameObject oldNearestObject = null;
+    
+    [ClientCallback]
     private void Awake() {
         transformSystem = GetComponent<PropTransformSystem>();
         transformSystem.OnNearestObjectChanged += OutlineOneObj;
     }
 
+    [ClientCallback]
     private void Start() {
         StartCoroutine(UpdateOutline());
     }
@@ -45,6 +48,7 @@ public class PropOutliner : NetworkBehaviour
         oldNearestObject = nearestObj;
     }
 
+    [ClientCallback]
     private void OnTriggerEnter(Collider other) {
         if (!isLocalPlayer) return;
 
@@ -57,6 +61,7 @@ public class PropOutliner : NetworkBehaviour
         if (!hitObjs.Contains(parentObj)) hitObjs.Add(parentObj);
     }
     
+    [ClientCallback]
     private void OnTriggerExit(Collider other) {
         if (!isLocalPlayer) return;
 

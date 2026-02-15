@@ -3,6 +3,12 @@ using UnityEngine;
 using Steamworks;
 using Steamworks.Data;
 using Mirror.FizzySteam;
+using System;
+
+public enum TransportType {
+    STEAM = 0,
+    TCP
+}
 
 public class NetworkController : Singleton<NetworkController>
 {
@@ -10,10 +16,22 @@ public class NetworkController : Singleton<NetworkController>
     private FizzyFacepunch fizzy;
     private const string HOST_ADDRESS = "hostAddress";
     private Lobby? currentLobby;
+<<<<<<< Updated upstream
     public static float progress { get; private set; } = 0f;
+=======
+    [SerializeField] private TransportType transportType;
+    private Action onStartHost;
+    private Action onStartClient;
+>>>>>>> Stashed changes
 
     protected override void Awake() {
         base.Awake();
+
+        Action hostCallback = transportType == TransportType.STEAM ? OnHostButtonClickedWithSteam : OnHostButtonClickedWithTCP;
+        Action clientCallback = transportType == TransportType.STEAM ? OnClientButtonClickedWithSteam : OnClientButtonClickedWithTCP;
+
+        onStartHost += hostCallback;
+        onStartClient += clientCallback;
     }
 
     private void Start() {
@@ -38,10 +56,57 @@ public class NetworkController : Singleton<NetworkController>
         SteamFriends.OnGameLobbyJoinRequested += OnLobbyJoinRequested;
     }
 
+    [ClientCallback]
     private void OnDestroy() {
         SteamMatchmaking.OnLobbyEntered -= OnLobbyEntered;
         SteamFriends.OnGameLobbyJoinRequested -= OnLobbyJoinRequested;
     }
+
+
+    public void OnHostButtonClicked() {
+        if (onStartHost == null) {
+            Debug.Log("Host Action is null..");
+            return;
+        }
+        onStartHost.Invoke();
+    }
+
+    public void OnClientButtonClicked() {
+        if (onStartClient == null) {
+            Debug.Log("Client Action is null..");
+            return;
+        }
+        onStartClient.Invoke();
+    }
+
+    private void OnHostButtonClickedWithSteam() {
+        CreateLobby(4);
+
+        GameManager.Instance.EnterLockState(LockState.LOCKED);
+
+        //UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Create Lobby Invoked");
+    }
+
+    private void OnClientButtonClickedWithSteam() { //when client jump in to the lobby by entering lobbyId.
+        UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Entering the lobby...");
+    }
+
+    private void OnApplicationQuit() {
+        if (SteamClient.IsValid) {
+            SteamClient.Shutdown();
+        }
+    }
+
+    private void OnHostButtonClickedWithTCP() {
+        manager.StartHost();
+    }
+
+    private void OnClientButtonClickedWithTCP() {
+        manager.networkAddress = "localhost";
+        manager.StartClient();
+    }
+
+/*--------------------------SteamCallbacks----------------------------*/
 
     private async void CreateLobby(int maxPlayer) {
         currentLobby = await SteamMatchmaking.CreateLobbyAsync(maxPlayer);
@@ -95,6 +160,7 @@ public class NetworkController : Singleton<NetworkController>
             UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Failed to join lobby");
         }
     }
+<<<<<<< Updated upstream
 
     public void OnHostButtonClicked() {
         CreateLobby(4);
@@ -119,4 +185,6 @@ public class NetworkController : Singleton<NetworkController>
         if (async == null) return 0f;
         return async.progress; 
     }
+=======
+>>>>>>> Stashed changes
 }

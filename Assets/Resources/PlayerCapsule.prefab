@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 8367952080534893590}
   - component: {fileID: 8027713189490750121}
   m_Layer: 0
-  m_Name: capsule_lite_dummy
+  m_Name: PlayerCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,6 +741,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4637386185355014359}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnFix
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 562f02ca-650d-458b-bef7-dc5bbd7287d9
+    m_ActionName: Player/Fix
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: 
@@ -753,7 +769,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8822470659753831373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22a8e0df2ecddd048ba3db8e56902867, type: 3}
   m_Name: 
@@ -761,6 +777,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  Cam: {fileID: 0}
   collision: {fileID: 2387193653717757083}
   Mesh: {fileID: 7043547059826573957}
   isOnCollision: 0
@@ -772,7 +789,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8822470659753831373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d4d6f10b832a0b4e957f9965f3de063, type: 3}
   m_Name: 
@@ -789,6 +806,7 @@ MonoBehaviour:
   mapLayer:
     serializedVersion: 2
     m_Bits: 448
+  player: {fileID: 8641762789907819450}
   skinWidth: 0.02
   maxSlideCount: 7
 --- !u!114 &8217318246630048316
@@ -798,7 +816,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8822470659753831373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dac415dcc482314ba757379d8815118, type: 3}
   m_Name: 
@@ -806,6 +824,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  player: {fileID: 8641762789907819450}
   camPivot: {fileID: 2009376710413751154}
   minDistance: 2
   maxDistance: 15
@@ -867,7 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1190683562005110306}
@@ -885,7 +904,7 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   onlySyncOnChangeCorrectionMultiplier: 2
-  useFixedUpdate: 0
+  useFixedUpdate: 1
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01

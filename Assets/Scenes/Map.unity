@@ -3565,7 +3565,7 @@ GameObject:
   - component: {fileID: 28123442}
   m_Layer: 0
   m_Name: Camera_full1
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9247,7 +9247,7 @@ GameObject:
   - component: {fileID: 73049587}
   m_Layer: 0
   m_Name: Camera9_sky+bank
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19105,7 +19105,7 @@ GameObject:
   - component: {fileID: 149159920}
   m_Layer: 0
   m_Name: Camera7_cityhall
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40433,7 +40433,7 @@ GameObject:
   - component: {fileID: 301485791}
   m_Layer: 0
   m_Name: Camera21_airport
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48206,7 +48206,7 @@ GameObject:
   - component: {fileID: 326681227}
   m_Layer: 0
   m_Name: Camera3_police
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50895,7 +50895,7 @@ GameObject:
   - component: {fileID: 341815905}
   m_Layer: 0
   m_Name: Camera14_aps
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90493,7 +90493,7 @@ GameObject:
   - component: {fileID: 643394729}
   m_Layer: 0
   m_Name: Camera_full3
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90630,7 +90630,7 @@ GameObject:
   - component: {fileID: 645772334}
   m_Layer: 0
   m_Name: Camera10_library
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95421,7 +95421,7 @@ GameObject:
   - component: {fileID: 685197803}
   m_Layer: 0
   m_Name: Camera17_hospital
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113680,7 +113680,7 @@ GameObject:
   - component: {fileID: 820271381}
   m_Layer: 0
   m_Name: Camera13_sea
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129991,7 +129991,7 @@ GameObject:
   - component: {fileID: 936021580}
   m_Layer: 0
   m_Name: Camera18_skate+fire
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136409,7 +136409,7 @@ GameObject:
   - component: {fileID: 975711567}
   m_Layer: 0
   m_Name: Camera24_subway+market
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143109,7 +143109,7 @@ GameObject:
   - component: {fileID: 1028655542}
   m_Layer: 0
   m_Name: Camera6_aps
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151419,7 +151419,7 @@ GameObject:
   - component: {fileID: 1093401785}
   m_Layer: 0
   m_Name: Camera15_park
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157495,7 +157495,7 @@ GameObject:
   - component: {fileID: 1136385246}
   m_Layer: 0
   m_Name: Camera1_office
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167078,7 +167078,7 @@ GameObject:
   - component: {fileID: 1202008152}
   m_Layer: 0
   m_Name: Camera5_school
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175842,7 +175842,7 @@ GameObject:
   - component: {fileID: 1262355629}
   m_Layer: 0
   m_Name: Camera4_mall-2
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184651,7 +184651,7 @@ GameObject:
   - component: {fileID: 1323981198}
   m_Layer: 0
   m_Name: Camera4_mall
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199766,7 +199766,7 @@ GameObject:
   - component: {fileID: 1440704404}
   m_Layer: 0
   m_Name: Camera_full2
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200392,7 +200392,7 @@ Transform:
   m_GameObject: {fileID: 1444316728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 160.1, y: 10, z: 1.02}
+  m_LocalPosition: {x: 9.1, y: 10, z: -2.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -202725,7 +202725,7 @@ GameObject:
   - component: {fileID: 1467566828}
   m_Layer: 0
   m_Name: Camera23_train2
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207294,7 +207294,7 @@ GameObject:
   - component: {fileID: 1505808391}
   m_Layer: 0
   m_Name: Camera12_subway
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207684,7 +207684,7 @@ GameObject:
   - component: {fileID: 1506234066}
   m_Layer: 0
   m_Name: Camera11_football
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233915,7 +233915,7 @@ GameObject:
   - component: {fileID: 1698432793}
   m_Layer: 0
   m_Name: Camera25_mosque
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245116,7 +245116,7 @@ GameObject:
   - component: {fileID: 1782674391}
   m_Layer: 0
   m_Name: Camera20_road
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246041,7 +246041,7 @@ GameObject:
   - component: {fileID: 1789043414}
   m_Layer: 0
   m_Name: Camera8_cityhall2
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273606,7 +273606,7 @@ GameObject:
   - component: {fileID: 2003972628}
   m_Layer: 0
   m_Name: Camera19_port
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278943,7 +278943,7 @@ GameObject:
   - component: {fileID: 2033495197}
   m_Layer: 0
   m_Name: Camera22_train
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281075,7 +281075,7 @@ GameObject:
   - component: {fileID: 2049072904}
   m_Layer: 0
   m_Name: Camera2_office2
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284241,7 +284241,7 @@ GameObject:
   - component: {fileID: 2074878167}
   m_Layer: 0
   m_Name: Camera16_gas
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285086,7 +285086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2079483091
 Transform:
   m_ObjectHideFlags: 0
@@ -288050,7 +288050,7 @@ GameObject:
   - component: {fileID: 2103231438}
   m_Layer: 0
   m_Name: Camera25_island
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

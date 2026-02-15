@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
+using Unity.VisualScripting;
+using UnityEngine.Rendering;
+using UnityEditor;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : NetworkBehaviour
@@ -16,7 +19,7 @@ public class PlayerMovement : NetworkBehaviour
     
     [SerializeField] private LayerMask mapLayer;
     
-    private Player player;
+    [SerializeField] private Player player;
     private Rigidbody rb;
     private CapsuleCollider body;
     private float bodyRadius = 0.3f;
@@ -25,8 +28,8 @@ public class PlayerMovement : NetworkBehaviour
 
     [SerializeField] int maxSlideCount = 7;
 
-    public void Init(Player player) {
-        this.player = player;
+    void Awake() {
+        if (player == null) player = GetComponentInParent<Player>();
         nowSpeed = walkSpeed;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -35,9 +38,26 @@ public class PlayerMovement : NetworkBehaviour
         bodyHeight = body.height;
     }
 
+    [Client]
     private void FixedUpdate()
     {
-        if (player.Cam == null || !isLocalPlayer) return;
+        Move();
+    }
+    
+    private void Move() {
+        if (!isLocalPlayer) {
+            Debug.Log($"{gameObject.name} : not Local Player"); 
+            return;
+        }
+        
+        if (player.isFixed) {
+            return;
+        }
+
+        if (player.Cam == null) {
+            Debug.Log($"{gameObject.name} : Cam is Null");
+            return;
+        }
 
         Vector3 moveDir = GetMoveDir();
 
@@ -51,7 +71,24 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         rb.MovePosition(currentPos);
+
+        // if (Vector3.Distance(currentPos, rb.position) > 0.1f) {
+        //     Debug.LogWarning("Position Mismatch! Something is snapping the player back.");
+        // }
     }
+
+    public override void OnStartLocalPlayer()
+    {
+        name = "Player"+Time.time;
+        PlayerInput input = GetComponent<PlayerInput>();
+
+        input.enabled = true;
+
+        input.ActivateInput();
+
+        this.enabled = true;
+    }
+
 
     public void TurnLookWay(Vector3 moveDir, float turnSpeed) {
         Quaternion targetRot = Quaternion.LookRotation(moveDir, Vector3.up);
@@ -127,19 +164,26 @@ public class PlayerMovement : NetworkBehaviour
 
     public void OnSprint(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
-
         bool isPress = context.ReadValue<float>() > 0.5f;        
         nowSpeed = isPress ? sprintSpeed : walkSpeed;
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
-        
         bool isPress = context.ReadValue<float>() > 0.5f;
 
         if (Utils.IsGround(transform.position, mapLayer) && isPress) {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    public void OnFix(InputAction.CallbackContext context) {
+        if (!isLocalPlayer) return;
+
+        if (!player.IsTransformed()) return; 
+        if (context.started) {
+            player.CmdRequestFix(!player.isFixed);
         }
     }
 }

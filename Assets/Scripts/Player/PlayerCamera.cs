@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
 using Unity.Cinemachine;
+using System.Collections;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerCamera : NetworkBehaviour
 {
-    private Player player;
+    [SerializeField] private Player player;
 
     private Transform cineMachine;
     private CinemachineCamera virtualCamera;
@@ -21,20 +22,15 @@ public class PlayerCamera : NetworkBehaviour
     private float yaw = 0f;
     private float nowDis = 0;
 
-    public void Init(Player player) {
-        this.player = player;
+    void Awake() {
+        if (player == null) player = GetComponent<Player>();
         nowDis = defaultDistance;
     }
 
     // Invoke after Start
     public override void OnStartLocalPlayer() {
-        base.OnStartLocalPlayer();
-        
         InitializeCamera();
-        
-        PlayerInput input = player.gameObject.GetComponent<PlayerInput>();
-        input.enabled = true;
-        input.ActivateInput();
+        this.enabled = true;
     }
 
     private void InitializeCamera() {
@@ -92,6 +88,8 @@ public class PlayerCamera : NetworkBehaviour
 
         Vector2 mouse = context.ReadValue<Vector2>();
         yaw += mouse.x * sensitivity;
+
+        if (player.isFixed) return;
         if (Input.GetKey(KeyCode.LeftAlt)) {
             player.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
         } 

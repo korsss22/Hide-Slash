@@ -15,9 +15,12 @@ public class PropTransformSystem : MonoBehaviour
 
     void Awake()
     {
-        holdUI = UIUtils.GetHoldUI(OnCompleteHold);
+        if (player == null) GetComponentInParent<Player>();
+    }
 
-        if (player == null) player = GetComponentInParent<Player>();
+    [ClientCallback]
+    private void Start() {
+        holdUI = UIUtils.GetHoldUI();    
     }
 
     public GameObject GetNearestObj(List<GameObject> objs)
@@ -66,19 +69,47 @@ public class PropTransformSystem : MonoBehaviour
         return;
     }
 
+    [ClientCallback]
     public void OnInteract(InputAction.CallbackContext context) {
-        if (!player.isOwned) return; 
-        if (!player.IsTransformed() && nearestObj == null) return;
+        player.gameObject.TryGetComponent(out NetworkIdentity identity);
         
-        if (context.started) holdUI.StartHold();
+        if (!player.isLocalPlayer) {
+            Debug.Log($"{player.name} is not localPlayer connId : {identity.connectionToClient.connectionId} from : {gameObject}");
+            return;
+        } 
+
+        if (!player.IsTransformed()) {
+            if (nearestObj == null) {
+                return;
+            } else {
+                Debug.Log("Transforming...");
+            }
+        }
+
+        if (context.started) holdUI.StartHold(OnCompleteHold);
         else if (context.performed) holdUI.CompleteHold();
         else if (context.canceled) holdUI.CancelHold();
     }
 
-    private void OnCompleteHold() {
-        if (!player.IsTransformed()) {
-            player.CmdRequestTransform(nearestObj.GetComponent<PropParent>().propID);
-        } else {
+    [Client]
+    private void OnCompleteHold()
+    {
+        if (!player.isLocalPlayer) {
+            Debug.Log($"{player.name} is not localPlayer from : {player.gameObject}");
+            return;
+        } 
+
+        if (!player.IsTransformed())
+        {
+            if (nearestObj == null) return;
+
+            PropParent prop = nearestObj.GetComponent<PropParent>();
+            if (prop == null) return;
+
+            player.CmdRequestTransform(prop.propID);
+        }
+        else
+        {
             player.CmdRequestTransform(-1);
         }
     }

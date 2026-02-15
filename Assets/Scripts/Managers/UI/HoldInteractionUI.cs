@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class HoldInteractionUI : MonoBehaviour
 {
     private Image holdCircle;
@@ -24,20 +25,19 @@ public class HoldInteractionUI : MonoBehaviour
         holdCircle.fillAmount = currentHoldTime / holdTime;
     }
 
-    public void StartHold()
+    public void StartHold(Action onLoaded)
     {
         isHolding = true;
         currentHoldTime = 0f;
+        onHoldComplete += onLoaded;
         gameObject.SetActive(true);
     }
 
-     public void CompleteHold()
+    public void CompleteHold()
     {
         isHolding = false;
         holdCircle.fillAmount = 1f;
         onHoldComplete?.Invoke();
-        // 여기서 성공 이펙트 / 사운드
-        // 필요하면 잠깐 보여주고 끄기
         gameObject.SetActive(false);
     }
 
