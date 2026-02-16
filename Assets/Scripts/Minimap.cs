@@ -9,7 +9,7 @@ public class Minimap : MonoBehaviour
     [SerializeField] private Vector3 offset = new(0f, 70f, 0f);
     [SerializeField] private LayerMask HiderMask;
     [SerializeField] private LayerMask SeekerMask;
-    [SerializeField] private bool isRotate = false;
+    public bool isRotate = false;
 
     private void Awake() {
         if (TargetObj == null) return;
@@ -21,6 +21,9 @@ public class Minimap : MonoBehaviour
         {
             Vector3 euler = Camera.main.transform.rotation.eulerAngles;
             euler.x = 90f;
+            RenderCamera.transform.rotation = Quaternion.Euler(euler);
+        } else {
+            Vector3 euler = new Vector3(90f, 0f, 0f);
             RenderCamera.transform.rotation = Quaternion.Euler(euler);
         }
         RenderCamera.transform.position = TargetObj.position + offset;
