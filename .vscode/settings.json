@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Multiplay Labs.sln"
+    "dotnet.defaultSolution": "Hide-Slash.sln"
 }

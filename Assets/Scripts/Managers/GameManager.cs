@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
     };
     private Stack<LockState> mouseLockStack = new();
     [SerializeField] PropDatabase database;
-
+    
     public bool IsMouseLocked { 
         get {
             if (CurrentLockState == LockState.LOCKED) return true;

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Cinemachine
+  - Minimap
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Prop
   - PropOutline
   - Map
-  - 
-  - 
+  - Hider
+  - Seeker
   - 
   - 
   - 

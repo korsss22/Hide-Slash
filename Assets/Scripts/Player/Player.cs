@@ -60,5 +60,7 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         this.enabled = true;
+
+        if (GameObject.FindGameObjectWithTag("Minimap").TryGetComponent(out Minimap minimap)) minimap.SetTarget(true, this.transform);
     }
 }

@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 3910989283073555867}
   - component: {fileID: 8367952080534893590}
   - component: {fileID: 8027713189490750121}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,6 +782,7 @@ MonoBehaviour:
   Mesh: {fileID: 7043547059826573957}
   isOnCollision: 0
   transformObjId: -1
+  isFixed: 0
 --- !u!114 &4637386185355014359
 MonoBehaviour:
   m_ObjectHideFlags: 0
