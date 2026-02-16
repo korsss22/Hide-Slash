@@ -4,6 +4,7 @@ using Steamworks;
 using Steamworks.Data;
 using Mirror.FizzySteam;
 using System;
+using System.Threading.Tasks;
 
 public enum TransportType {
     STEAM = 0,
@@ -18,13 +19,14 @@ public class NetworkController : Singleton<NetworkController>
     private Lobby? currentLobby;
     [SerializeField] private TransportType transportType;
     private Action onStartHost;
-    private Action onStartClient;
+    private Action<string> onStartClient;
+    public Action OnRequestLobby;
 
     protected override void Awake() {
         base.Awake();
 
         Action hostCallback = transportType == TransportType.STEAM ? OnHostButtonClickedWithSteam : OnHostButtonClickedWithTCP;
-        Action clientCallback = transportType == TransportType.STEAM ? OnClientButtonClickedWithSteam : OnClientButtonClickedWithTCP;
+        Action<string> clientCallback = transportType == TransportType.STEAM ? OnClientButtonClickedWithSteam : OnClientButtonClickedWithTCP;
 
         onStartHost += hostCallback;
         onStartClient += clientCallback;
@@ -59,7 +61,7 @@ public class NetworkController : Singleton<NetworkController>
     }
 
 
-    public void OnHostButtonClicked() {
+    public void OnStartButtonClicked() {
         if (onStartHost == null) {
             Debug.Log("Host Action is null..");
             return;
@@ -68,24 +70,42 @@ public class NetworkController : Singleton<NetworkController>
         onStartHost.Invoke();
     }
 
-    public void OnClientButtonClicked() {
+    public void OnJoinButtonClicked() {
+        OnRequestLobby?.Invoke();
+    }
+
+    public async Task<Lobby[]> GetLobbyList() {
+        var result = await SteamMatchmaking.LobbyList.RequestAsync();
+        return result ?? Array.Empty<Lobby>();
+    }
+    
+    public void RequestJoin(string lobbyId) {
         if (onStartClient == null) {
             Debug.Log("Client Action is null..");
             return;
         }
-        onStartClient.Invoke();
+
+        onStartClient.Invoke(lobbyId);
     }
 
     private void OnHostButtonClickedWithSteam() {
         CreateLobby(4);
 
         GameManager.Instance.EnterLockState(LockState.LOCKED);
-
-        //UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Create Lobby Invoked");
     }
 
-    private void OnClientButtonClickedWithSteam() { //when client jump in to the lobby by entering lobbyId.
+    private async void OnClientButtonClickedWithSteam(string lobbyId) { //when client jump into the lobby by entering lobbyId.
         UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Entering the lobby...");
+
+        if (!ulong.TryParse(lobbyId, out ulong id)) return;
+
+        Lobby lobby = new(id);
+
+        RoomEnter flag = await lobby.Join();
+        
+        if (flag != RoomEnter.Success) {
+            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "failed to join lobby...");
+        }
     }
 
     private void OnApplicationQuit() {
@@ -98,7 +118,7 @@ public class NetworkController : Singleton<NetworkController>
         manager.StartHost();
     }
 
-    private void OnClientButtonClickedWithTCP() {
+    private void OnClientButtonClickedWithTCP(string _) {
         manager.networkAddress = "localhost";
         manager.StartClient();
     }
@@ -114,37 +134,20 @@ public class NetworkController : Singleton<NetworkController>
             return;
         }
 
-        currentLobby?.SetFriendsOnly(); // refactor to switch
-        //currentLobby?.SetData("GameKey", "HideAndSlashJo");
+        currentLobby?.SetPublic(); // refactor to switch
+
         currentLobby?.SetJoinable(true);
 
+        //It's for test. refactor SaveDatas to Variable.
+        currentLobby?.SetData("LobbyName", "MyLobby");
+        currentLobby?.SetData("MaxPlayer", "16");
         currentLobby?.SetData(HOST_ADDRESS, SteamClient.SteamId.ToString());
-
     }
 
     private void OnLobbyEntered(Lobby lobby)
     {
         lobby.Refresh();
-        // string lobbyName = lobby.GetData("GameKey");
-        // if (lobbyName != "HideAndSlashJo")
-        // {
-        //     UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Wrong Lobby. Leaving...");
-        //     lobby.Leave();
-        //     return;
-        // }
-        string hostSteamId = lobby.GetData(HOST_ADDRESS);
-
-        fizzy.SteamUserID = SteamClient.SteamId;
-
-        if (hostSteamId == SteamClient.SteamId.ToString())
-        {   
-            manager.StartHost();
-        }
-        else
-        {
-            manager.networkAddress = hostSteamId;
-            manager.StartClient();
-        }
+        
     }
 
     private async void OnLobbyJoinRequested(Lobby lobby, SteamId steamId) {
