@@ -6,5 +6,5 @@ using System;
 
 public class NetworkManagerLab : NetworkManager
 {
-
+    
 }

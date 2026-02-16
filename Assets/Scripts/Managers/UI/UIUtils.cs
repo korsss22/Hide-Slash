@@ -23,9 +23,6 @@ public class UIUtils : Singleton<UIUtils>
     [SerializeField] private DebugConsole DebugConsole = null; 
     [SerializeField] private PausePanel PausePanel = null;   
     [SerializeField] private HoldInteractionUI HoldInteractionUI = null;
-    [SerializeField] private Image loadingBar = null;
-
-    private Coroutine loadingBarCoroutine;
 
     override protected void Awake() {
         base.Awake();
@@ -42,11 +39,6 @@ public class UIUtils : Singleton<UIUtils>
 
         if (HoldInteractionUI == null) {
             Debug.LogError("holdInteractionUI Load failed!");
-            return;
-        }
-
-        if (loadingBar == null) {
-            Debug.LogError("loadingBar Load failed!");
             return;
         }
     }
@@ -103,63 +95,5 @@ public class UIUtils : Singleton<UIUtils>
         HoldInteractionUI holdUI = Instance.HoldInteractionUI;
         holdUI.onHoldComplete = onLoaded;
         return holdUI;
-    }
-
-    public static void StartLoadingBar()
-    {
-        if (Instance == null || Instance.loadingBar == null) {
-            Debug.LogError("UIUtil Instance or loadingBar is not initialized...");
-            return;
-        }
-
-        if (Instance.loadingBarCoroutine != null) {
-            Instance.StopCoroutine(Instance.loadingBarCoroutine);
-        }
-
-        if (!Instance.loadingBar.gameObject.activeSelf)
-        {
-            Instance.loadingBar.gameObject.SetActive(true);
-        }
-
-        Instance.loadingBarCoroutine = Instance.StartCoroutine(LoadingBarAsync());
-    }
-
-    private static void SetLoadingBarProgress(float progress) {
-        if (Instance == null || Instance.loadingBar == null) {
-            Debug.LogError("UIUtil Instance or loadingBar is not initialized...");
-            return;
-        }
-
-        Instance.loadingBar.fillAmount = progress;
-    }
-
-    private static void SetLoadingBarActive(bool isActive) {
-        if (Instance == null || Instance.loadingBar == null) {
-            Debug.LogError("UIUtil Instance or loadingBar is not initialized...");
-            return;
-        }
-        if (!isActive) Instance.loadingBar.fillAmount = 0f;
-        Instance.loadingBar.gameObject.SetActive(isActive);
-    }
-
-    private static IEnumerator LoadingBarAsync()
-    {
-        if (NetworkController.Instance == null) {
-            Debug.LogError("NetworkController Instance is not initialized...");
-            yield break;
-        }
-
-        float progress = 0f;
-
-        while (progress < 0.85f)
-        {
-            progress = NetworkController.Instance.GetSceneProgress();
-            SetLoadingBarProgress(progress);
-            yield return null;
-        }
-
-        SetLoadingBarActive(false);
-
-        yield break;
     }
 }

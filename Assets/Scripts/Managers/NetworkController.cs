@@ -20,11 +20,6 @@ public class NetworkController : Singleton<NetworkController>
     private Action onStartHost;
     private Action onStartClient;
 
-
-    [SerializeField] private TransportType transportType;
-    private Action onStartHost;
-    private Action onStartClient;
-
     protected override void Awake() {
         base.Awake();
 
@@ -69,6 +64,7 @@ public class NetworkController : Singleton<NetworkController>
             Debug.Log("Host Action is null..");
             return;
         }
+
         onStartHost.Invoke();
     }
 
@@ -143,13 +139,11 @@ public class NetworkController : Singleton<NetworkController>
         if (hostSteamId == SteamClient.SteamId.ToString())
         {   
             manager.StartHost();
-            UIUtils.StartLoadingBar();
         }
         else
         {
             manager.networkAddress = hostSteamId;
             manager.StartClient();
-            UIUtils.StartLoadingBar();
         }
     }
 

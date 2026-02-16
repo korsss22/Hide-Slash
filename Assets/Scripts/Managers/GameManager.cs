@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -30,11 +31,28 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public Action OnGameStart;
+    public Action OnGamePlaying;
+    public Action OnGameEnd;
+
     protected override void Awake() {
         base.Awake();
         PropUtil.Init(database);
+        
         EnterGameState(GameState.MAIN_MENU);
         EnterLockState(LockState.UNLOCKED);
+
+        OnGameStart += EnterPlayMode;
+    }
+
+    public void GameStart() {
+        OnGameStart?.Invoke();
+    }
+
+    private void EnterPlayMode() {
+        EnterGameState(GameState.PLAYING);
+        EnterLockState(LockState.LOCKED);
+        Debug.Log("Entering Lock State");
     }
 
     public void EnterGameState(GameState nowState) {
@@ -63,5 +81,9 @@ public class GameManager : Singleton<GameManager>
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
+
+    private void OnDestroy() {
+        OnGameStart -= EnterPlayMode;
     }
 }
