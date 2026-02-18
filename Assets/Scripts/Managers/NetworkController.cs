@@ -11,6 +11,12 @@ public enum TransportType {
     TCP
 }
 
+public enum LobbyType {
+    Public = 0,
+    FriendsOnly,
+    InviteOnly
+}
+
 public class NetworkController : Singleton<NetworkController>
 {
     private NetworkManager manager;
@@ -18,17 +24,14 @@ public class NetworkController : Singleton<NetworkController>
     private const string HOST_ADDRESS = "hostAddress";
     private Lobby? currentLobby;
     [SerializeField] private TransportType transportType;
-    private Action onStartHost;
     private Action<string> onStartClient;
     public Action OnRequestLobby;
 
     protected override void Awake() {
         base.Awake();
 
-        Action hostCallback = transportType == TransportType.STEAM ? OnHostButtonClickedWithSteam : OnHostButtonClickedWithTCP;
         Action<string> clientCallback = transportType == TransportType.STEAM ? OnClientButtonClickedWithSteam : OnClientButtonClickedWithTCP;
 
-        onStartHost += hostCallback;
         onStartClient += clientCallback;
     }
 
@@ -62,12 +65,7 @@ public class NetworkController : Singleton<NetworkController>
 
 
     public void OnStartButtonClicked() {
-        if (onStartHost == null) {
-            Debug.Log("Host Action is null..");
-            return;
-        }
 
-        onStartHost.Invoke();
     }
 
     public void OnJoinButtonClicked() {
@@ -86,12 +84,6 @@ public class NetworkController : Singleton<NetworkController>
         }
 
         onStartClient.Invoke(lobbyId);
-    }
-
-    private void OnHostButtonClickedWithSteam() {
-        CreateLobby(4);
-
-        GameManager.Instance.EnterLockState(LockState.LOCKED);
     }
 
     private async void OnClientButtonClickedWithSteam(string lobbyId) { //when client jump into the lobby by entering lobbyId.
@@ -125,33 +117,47 @@ public class NetworkController : Singleton<NetworkController>
 
 /*--------------------------SteamCallbacks----------------------------*/
 
-    private async void CreateLobby(int maxPlayer) {
+    public async void CreateLobby(string lobbyName, string password, int maxPlayer, LobbyType lobbyType) {
         currentLobby = await SteamMatchmaking.CreateLobbyAsync(maxPlayer);
-
 
         if (!currentLobby.HasValue) {
             UIUtils.PrintUI(DEBUG_TYPE.ERROR, "failed to create lobby...");
             return;
         }
 
-        currentLobby?.SetPublic(); // refactor to switch
+        switch (lobbyType)
+        {
+            case LobbyType.Public:
+                currentLobby?.SetPublic();
+                break;
+            case LobbyType.FriendsOnly:
+                currentLobby?.SetFriendsOnly();
+                break;
+            case LobbyType.InviteOnly:
+                currentLobby?.SetPrivate();
+                break;
+            default:
+                currentLobby?.SetPublic();
+                break;
+        }
 
         currentLobby?.SetJoinable(true);
 
-        //It's for test. refactor SaveDatas to Variable.
-        currentLobby?.SetData("LobbyName", "MyLobby");
-        currentLobby?.SetData("MaxPlayer", "16");
+        currentLobby?.SetData("LobbyName", lobbyName);
+        currentLobby?.SetData("Password", password);
+        currentLobby?.SetData("MaxPlayer", maxPlayer.ToString());
         currentLobby?.SetData(HOST_ADDRESS, SteamClient.SteamId.ToString());
     }
 
     private void OnLobbyEntered(Lobby lobby)
     {
         lobby.Refresh();
-        
+        //Add player profile image code
     }
 
     private async void OnLobbyJoinRequested(Lobby lobby, SteamId steamId) {
         RoomEnter enter = await lobby.Join();
+
 
         if (enter != RoomEnter.Success)
         {
