@@ -26,6 +26,7 @@ public class NetworkController : Singleton<NetworkController>
     [SerializeField] private TransportType transportType;
     private Action<string> onStartClient;
     public Action OnRequestLobby;
+    public Action OnLobbyEnter;
 
     protected override void Awake() {
         base.Awake();
@@ -152,6 +153,9 @@ public class NetworkController : Singleton<NetworkController>
     private void OnLobbyEntered(Lobby lobby)
     {
         lobby.Refresh();
+        Debug.Log("OnLobbyEntered");
+        OnLobbyEnter?.Invoke();
+        
         //Add player profile image code
     }
 
