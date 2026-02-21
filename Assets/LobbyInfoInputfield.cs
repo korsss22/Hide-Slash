@@ -1,4 +1,5 @@
 using System;
+using Steamworks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,11 @@ public class LobbyInfoInputfield : MonoBehaviour
     public void CreateLobby() {   
         GetValues(out string lobbyName, out string password, out int maxPlayerIndex, out LobbyType lobbyType);
 
-        if (!CheckInputValid(lobbyName, maxPlayerIndex)) {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Lobby Info is not valid...");
+        if (!CheckInputValid(lobbyName, maxPlayerIndex)) return;
+        if (!SteamClient.IsValid) {
+            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "SteamClient is not valid...");
             return;
         }
-
         NetworkController.Instance.CreateLobby(lobbyName, password, maxPlayerIndex, lobbyType);
     }
 
