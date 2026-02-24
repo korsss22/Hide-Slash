@@ -152,11 +152,26 @@ public class NetworkController : Singleton<NetworkController>
 
     private void OnLobbyEntered(Lobby lobby)
     {
+        if (NetworkServer.active || NetworkClient.active)
+        {
+            Debug.Log("Network already active, ignore StartHost");
+            return;
+        }
         lobby.Refresh();
         Debug.Log("OnLobbyEntered");
         OnLobbyEnter?.Invoke();
         
-        //Add player profile image code
+        string gameId = lobby.GetData(HOST_ADDRESS);
+
+        if (gameId == null) return;
+
+        if (gameId == SteamClient.SteamId.ToString()) { //host
+            Debug.Log("Its host. StartHost");
+            manager.StartHost();
+        } else {
+            manager.networkAddress = gameId;
+            manager.StartClient();
+        }
     }
 
     private async void OnLobbyJoinRequested(Lobby lobby, SteamId steamId) {

@@ -11,11 +11,9 @@ public class LobbyController : MonoBehaviour
     private GameObject nowScreen = null;
 
     private void Start() {
-        NetworkController.Instance.OnLobbyEnter += Lobby;
     }
 
     private void OnDisable() {
-        NetworkController.Instance.OnLobbyEnter -= Lobby;
     }
 
     public void LobbyList() {
