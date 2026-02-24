@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 3910989283073555867}
   - component: {fileID: 8367952080534893590}
   - component: {fileID: 8027713189490750121}
+  - component: {fileID: 5963262793167457395}
   m_Layer: 9
   m_Name: PlayerCapsule
   m_TagString: Untagged
@@ -783,6 +784,7 @@ MonoBehaviour:
   isOnCollision: 0
   transformObjId: -1
   isFixed: 0
+  IsRunning: 0
 --- !u!114 &4637386185355014359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,6 +833,8 @@ MonoBehaviour:
   maxDistance: 15
   defaultDistance: 5
   sensitivity: 1
+  walkFOV: 60
+  runFOV: 90
 --- !u!54 &3910989283073555867
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -909,6 +913,28 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!95 &5963262793167457395
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822470659753831373}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9669bd9e1c36689469c74c86156d498c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8826925187881141310
 GameObject:
   m_ObjectHideFlags: 0

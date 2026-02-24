@@ -2,6 +2,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
+using System;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCamera))]
@@ -17,6 +18,9 @@ public class Player : NetworkBehaviour
     public bool isOnCollision = false;
     [SyncVar(hook = nameof(OnTransformChanged))] public int transformObjId = -1;
     [SyncVar(hook = nameof(OnFixed))] public bool isFixed = false;
+    [SyncVar(hook = nameof(OnPlayerRunningChanged))] public bool IsRunning = false;
+
+    public Action<bool> OnRunningChanged;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -57,10 +61,14 @@ public class Player : NetworkBehaviour
         }
     }
 
+    private void OnPlayerRunningChanged(bool oldValue, bool newValue) {
+        OnRunningChanged?.Invoke(newValue);
+    }
+
     public override void OnStartLocalPlayer()
     {
         this.enabled = true;
-
-        if (GameObject.FindGameObjectWithTag("Minimap").TryGetComponent(out Minimap minimap)) minimap.SetTarget(true, this.transform);
+        playerCamera.RegisterEvent(this);
+        GameManager.Instance.OnLocalPlayerSpawned?.Invoke(this);
     }
 }

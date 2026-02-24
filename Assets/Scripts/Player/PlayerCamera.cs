@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using Mirror;
 using Unity.Cinemachine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerCamera : NetworkBehaviour
@@ -22,9 +23,25 @@ public class PlayerCamera : NetworkBehaviour
     private float yaw = 0f;
     private float nowDis = 0;
 
+    [SerializeField] private float walkFOV = 60f;
+    [SerializeField] private float runFOV = 70f;
+    private Coroutine FOVCoroutine;
+
     void Awake() {
         if (player == null) player = GetComponent<Player>();
         nowDis = defaultDistance;
+    }
+
+    public void RegisterEvent(Player player) {
+        player.OnRunningChanged += ChangeRunningFOV;
+    }
+
+    private IEnumerator ChangeFOV(float target) {
+        while(Mathf.Abs(virtualCamera.Lens.FieldOfView - target) > 0.1f) {
+            virtualCamera.Lens.FieldOfView = Mathf.Lerp(virtualCamera.Lens.FieldOfView, target, Time.deltaTime * 3f);
+            yield return null;
+        }
+        virtualCamera.Lens.FieldOfView = target;
     }
 
     // Invoke after Start
@@ -49,6 +66,14 @@ public class PlayerCamera : NetworkBehaviour
     }
 
 /*----------------Camera Callback----------------*/
+
+    private void ChangeRunningFOV(bool running) {
+        if (FOVCoroutine != null) StopCoroutine(FOVCoroutine);
+
+        float TargetFOV = running ? runFOV : walkFOV;
+
+        FOVCoroutine = StartCoroutine(ChangeFOV(TargetFOV));
+    }
 
     public void OnScrollWheel(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
@@ -92,7 +117,6 @@ public class PlayerCamera : NetworkBehaviour
         if (player.isFixed) return;
         if (Input.GetKey(KeyCode.LeftAlt)) {
             player.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
-        } 
-        
+        }
     }
 }

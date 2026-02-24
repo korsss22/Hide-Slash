@@ -4,6 +4,7 @@ using Mirror;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using UnityEditor;
+using Mirror.Examples.Common.Controllers.Tank;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : NetworkBehaviour
@@ -166,6 +167,12 @@ public class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer) return;
         bool isPress = context.ReadValue<float>() > 0.5f;        
         nowSpeed = isPress ? sprintSpeed : walkSpeed;
+        player.IsRunning = isPress;
+    }
+
+    [Command]
+    private void CmdSetRunning(bool newValue) {
+        player.IsRunning = newValue;
     }
 
     public void OnJump(InputAction.CallbackContext context) {
