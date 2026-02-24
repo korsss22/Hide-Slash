@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Mirror;
 using Mirror.BouncyCastle.Pkix;
 using UnityEditor;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class UIUtils : Singleton<UIUtils>
     [SerializeField] private DebugConsole DebugConsole = null; 
     [SerializeField] private PausePanel PausePanel = null;   
     [SerializeField] private HoldInteractionUI HoldInteractionUI = null;
+    private Transform canvasTransform;
 
     override protected void Awake() {
         base.Awake();
@@ -41,6 +43,8 @@ public class UIUtils : Singleton<UIUtils>
             Debug.LogError("holdInteractionUI Load failed!");
             return;
         }
+
+        canvasTransform = transform.GetComponentInChildren<Canvas>(true).transform;
     }
 
     void Start()
@@ -95,5 +99,16 @@ public class UIUtils : Singleton<UIUtils>
         HoldInteractionUI holdUI = Instance.HoldInteractionUI;
         holdUI.onHoldComplete = onLoaded;
         return holdUI;
+    }
+
+    public void TurnGameUIOn() {
+        Transform GameUI = canvasTransform.Find("GameUI");
+        if (GameUI == null) {
+            Debug.LogError("failed to find GameUI");
+            return;
+        }
+        GameUI.gameObject.SetActive(true);
+        Transform local = NetworkClient.localPlayer.transform;
+        if (GameObject.FindGameObjectWithTag("Minimap").TryGetComponent(out Minimap minimap)) minimap.SetTarget(true, local);
     }
 }

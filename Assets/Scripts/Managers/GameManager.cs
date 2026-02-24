@@ -34,6 +34,7 @@ public class GameManager : Singleton<GameManager>
     public Action OnGameStart;
     public Action OnGamePlaying;
     public Action OnGameEnd;
+    public Action<Player> OnLocalPlayerSpawned;
 
     protected override void Awake() {
         base.Awake();
@@ -43,6 +44,7 @@ public class GameManager : Singleton<GameManager>
         EnterLockState(LockState.UNLOCKED);
 
         OnGameStart += EnterPlayMode;
+        OnLocalPlayerSpawned += TurnPlayerUIOn;
     }
 
     public void GameStart() {
@@ -52,7 +54,12 @@ public class GameManager : Singleton<GameManager>
     private void EnterPlayMode() {
         EnterGameState(GameState.PLAYING);
         EnterLockState(LockState.LOCKED);
+        
         Debug.Log("Entering Lock State");
+    }
+
+    private void TurnPlayerUIOn(Player player) {
+        UIUtils.Instance.TurnGameUIOn();
     }
 
     public void EnterGameState(GameState nowState) {

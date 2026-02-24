@@ -30,6 +30,7 @@ public class Minimap : MonoBehaviour
     }
 
     public void SetTarget(bool isHider, Transform target) {
+        RenderCamera = GameObject.Find("MinimapRenderer").GetComponent<Camera>();
         TargetObj = target;
         RenderCamera.cullingMask = isHider ? HiderMask : SeekerMask;
     }

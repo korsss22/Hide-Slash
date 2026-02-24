@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cinemachine
   - Minimap
+  - GameUI
   layers:
   - Default
   - TransparentFX
