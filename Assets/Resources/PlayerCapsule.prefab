@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65176326453313d4c94304f3553d8a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8641762789907819450}
-  objDatabase: {fileID: 0}
+  Player: {fileID: 8641762789907819450}
+  PlayerMesh: {fileID: 7043547059826573957}
   nearestObj: {fileID: 0}
 --- !u!114 &790316058748035470
 MonoBehaviour:
@@ -778,13 +778,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  Cam: {fileID: 0}
-  collision: {fileID: 2387193653717757083}
-  Mesh: {fileID: 7043547059826573957}
-  isOnCollision: 0
   transformObjId: -1
   isFixed: 0
-  IsRunning: 0
+  isRunning: 0
 --- !u!114 &4637386185355014359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,18 +796,15 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  inputVec: {x: 0, y: 0}
-  moveVec: {x: 0, y: 0, z: 0}
   walkSpeed: 5
   sprintSpeed: 12
-  nowSpeed: 0
   jumpForce: 2
   mapLayer:
     serializedVersion: 2
     m_Bits: 448
-  player: {fileID: 8641762789907819450}
   skinWidth: 0.02
   maxSlideCount: 7
+  colliderBody: {fileID: 1242436386905959280}
 --- !u!114 &8217318246630048316
 MonoBehaviour:
   m_ObjectHideFlags: 0

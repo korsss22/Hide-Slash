@@ -6,16 +6,17 @@ using UnityEngine.InputSystem;
 
 public class PropTransformSystem : MonoBehaviour
 {
-    [SerializeField] private Player player;
-    [SerializeField] private PropDatabase objDatabase;
+// fields
+    [SerializeField] private Player Player;
+    [SerializeField] private Transform PlayerMesh;
     private HoldInteractionUI holdUI;
     private GameObject transformedObj = null;
     public GameObject nearestObj = null;
     public event Action<GameObject> OnNearestObjectChanged;
-
+    
     void Awake()
     {
-        if (player == null) GetComponentInParent<Player>();
+        if (Player == null) Player = GetComponentInParent<Player>();
     }
 
     [ClientCallback]
@@ -23,6 +24,21 @@ public class PropTransformSystem : MonoBehaviour
         holdUI = UIUtils.GetHoldUI();    
     }
 
+// Events
+    public void RegisterEvent(Player player) {
+        this.Player = player;
+        player.OnTransformChanged += OnTransform;
+    }
+
+    private void OnTransform(int oldValue, int newValue) {
+        if (newValue == -1) {
+            Revert();
+        } else {
+            Apply(newValue);
+        }
+    }
+
+// Object Highlight implements
     public GameObject GetNearestObj(List<GameObject> objs)
     {
         if (objs.Count == 0) return null;
@@ -52,6 +68,38 @@ public class PropTransformSystem : MonoBehaviour
         return nearest;
     }
 
+
+// Transform implements
+    public void Apply(int prefabId) {
+        PlayerMesh.gameObject.SetActive(false);
+        
+        CreateTransformObj(prefabId);
+    }
+
+    public void Revert() {
+        PlayerMesh.gameObject.SetActive(true);
+
+        Destroy(transformedObj);
+    }
+
+    private void CreateTransformObj(int prefabId) {
+        PropIdentify prop = PropUtil.GetPropById(prefabId);
+
+        if (prop == null) {
+            Debug.LogError("May prefabId is not valid... PrefabId : "+prefabId);
+            return;
+        }
+
+        GameObject transformObj = prop.propPrefab;
+
+        transformedObj = Instantiate(transformObj, Player.transform);
+        
+        PropUtil.SetPropLayerInChildren(transformedObj, LayerMask.NameToLayer("Prop"));
+
+        PropUtil.SetAllChildColliders(transformedObj, false);
+        transformedObj.transform.localPosition = Vector3.zero;
+    }
+
     public void UpdateNearestObj(List<GameObject> hitObjs) {
         if (hitObjs.Count == 0) {
             nearestObj = null;
@@ -69,16 +117,18 @@ public class PropTransformSystem : MonoBehaviour
         return;
     }
 
+
+// Input Events
     [ClientCallback]
     public void OnInteract(InputAction.CallbackContext context) {
-        player.gameObject.TryGetComponent(out NetworkIdentity identity);
+        Player.gameObject.TryGetComponent(out NetworkIdentity identity);
         
-        if (!player.isLocalPlayer) {
-            Debug.Log($"{player.name} is not localPlayer connId : {identity.connectionToClient.connectionId} from : {gameObject}");
+        if (!Player.isLocalPlayer) {
+            Debug.Log($"{Player.name} is not localPlayer connId : {identity.connectionToClient.connectionId} from : {gameObject}");
             return;
         } 
 
-        if (!player.IsTransformed()) {
+        if (!Player.IsTransformed) {
             if (nearestObj == null) {
                 return;
             } else {
@@ -94,53 +144,24 @@ public class PropTransformSystem : MonoBehaviour
     [Client]
     private void OnCompleteHold()
     {
-        if (!player.isLocalPlayer) {
-            Debug.Log($"{player.name} is not localPlayer from : {player.gameObject}");
+        if (!Player.isLocalPlayer) {
+            Debug.Log($"{Player.name} is not localPlayer from : {Player.gameObject}");
             return;
         } 
 
-        if (!player.IsTransformed())
+        if (!Player.IsTransformed)
         {
             if (nearestObj == null) return;
 
             PropParent prop = nearestObj.GetComponent<PropParent>();
             if (prop == null) return;
 
-            player.CmdRequestTransform(prop.propID);
+            Player.CmdRequestTransform(prop.propID);
         }
         else
         {
-            player.CmdRequestTransform(-1);
+            Player.CmdRequestTransform(-1);
         }
     }
 
-    public void Apply(int prefabId) {
-        player.Mesh.gameObject.SetActive(false);
-        
-        CreateTransformObj(prefabId);
-    }
-
-    public void Revert() {
-        player.Mesh.gameObject.SetActive(true);
-
-        Destroy(transformedObj);
-    }
-
-    private void CreateTransformObj(int prefabId) {
-        PropIdentify prop = PropUtil.GetPropById(prefabId);
-
-        if (prop == null) {
-            Debug.LogError("May prefabId is not valid... PrefabId : "+prefabId);
-            return;
-        }
-
-        GameObject transformObj = prop.propPrefab;
-
-        transformedObj = Instantiate(transformObj, player.transform);
-        
-        PropUtil.SetPropLayerInChildren(transformedObj, LayerMask.NameToLayer("Prop"));
-
-        PropUtil.SetAllChildColliders(transformedObj, false);
-        transformedObj.transform.localPosition = Vector3.zero;
-    }
 }

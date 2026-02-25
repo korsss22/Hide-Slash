@@ -9,7 +9,6 @@ using System;
 public class PlayerCamera : NetworkBehaviour
 {
     [SerializeField] private Player player;
-
     private Transform cineMachine;
     private CinemachineCamera virtualCamera;
     private CinemachineOrbitalFollow orbitCam;
@@ -44,14 +43,9 @@ public class PlayerCamera : NetworkBehaviour
         virtualCamera.Lens.FieldOfView = target;
     }
 
-    // Invoke after Start
+// mirror callbacks
     public override void OnStartLocalPlayer() {
-        InitializeCamera();
         this.enabled = true;
-    }
-
-    private void InitializeCamera() {
-        player.Cam = Camera.main;
         cineMachine = GameObject.FindGameObjectWithTag("Cinemachine").transform;
         virtualCamera = cineMachine.gameObject.GetComponent<CinemachineCamera>();
         orbitCam = cineMachine.gameObject.GetComponent<CinemachineOrbitalFollow>();
@@ -67,7 +61,7 @@ public class PlayerCamera : NetworkBehaviour
 
 /*----------------Camera Callback----------------*/
 
-    private void ChangeRunningFOV(bool running) {
+    private void ChangeRunningFOV(bool _, bool running) {
         if (FOVCoroutine != null) StopCoroutine(FOVCoroutine);
 
         float TargetFOV = running ? runFOV : walkFOV;
@@ -114,7 +108,7 @@ public class PlayerCamera : NetworkBehaviour
         Vector2 mouse = context.ReadValue<Vector2>();
         yaw += mouse.x * sensitivity;
 
-        if (player.isFixed) return;
+        if (player.IsFixed) return;
         if (Input.GetKey(KeyCode.LeftAlt)) {
             player.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
         }

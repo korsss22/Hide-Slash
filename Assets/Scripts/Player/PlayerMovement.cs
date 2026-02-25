@@ -1,40 +1,39 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
-using Unity.VisualScripting;
-using UnityEngine.Rendering;
-using UnityEditor;
-using Mirror.Examples.Common.Controllers.Tank;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : NetworkBehaviour
 {
-    [SerializeField]private Vector2 inputVec;
-    [SerializeField]private Vector3 moveVec;
-
-    [Range(0.01f, 5f)][SerializeField] private float walkSpeed = 2f;
-    [Range(0.01f, 20f)][SerializeField] private float sprintSpeed = 4f;
-    [SerializeField] private float nowSpeed = 0f;
-
-    [Range(1f, 10f)][SerializeField] private float jumpForce = 4f;
-    
-    [SerializeField] private LayerMask mapLayer;
-    
-    [SerializeField] private Player player;
+// fields
+    private Player player;
+    private Camera playerCam;
+    private Vector2 inputVec;
+    private Vector3 moveVec;
+    private float nowSpeed = 0f;
     private Rigidbody rb;
     private CapsuleCollider body;
     private float bodyRadius = 0.3f;
     private float bodyHeight = 1.8f;
-    [SerializeField]private float skinWidth = 0.02f;
 
+// adjustable variables
+    [Header("adjustable variables")]
+    [Range(0.01f, 5f)][SerializeField] private float walkSpeed = 2f;
+    [Range(0.01f, 20f)][SerializeField] private float sprintSpeed = 4f;
+    [Range(1f, 10f)][SerializeField] private float jumpForce = 4f;
+    [SerializeField] private LayerMask mapLayer;
+    [SerializeField]private float skinWidth = 0.02f;
     [SerializeField] int maxSlideCount = 7;
 
+// assignable variables
+    [SerializeField] private Collider colliderBody;
+
     void Awake() {
-        if (player == null) player = GetComponentInParent<Player>();
         nowSpeed = walkSpeed;
+        playerCam = Camera.main;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        body = player.collision.GetComponent<CapsuleCollider>();
+        body = colliderBody.GetComponent<CapsuleCollider>();
         bodyRadius = body.radius;
         bodyHeight = body.height;
     }
@@ -42,20 +41,40 @@ public class PlayerMovement : NetworkBehaviour
     [Client]
     private void FixedUpdate()
     {
+        if (player == null) {
+            Debug.LogError("player is not registered yet");
+            return;
+        }
         Move();
     }
     
+// Events
+    public void RegisterEvent(Player player) {
+        this.player = player;
+        player.OnFixChanged += OnFixed;
+        player.OnRunningChanged += OnRunning;
+    }
+
+    private void OnFixed(bool oldValue, bool newValue) {
+        rb.isKinematic = newValue;
+    }
+
+    private void OnRunning(bool oldValue, bool newValue) {
+        nowSpeed = newValue ? sprintSpeed : walkSpeed;
+    }
+
+// Movement implements
     private void Move() {
         if (!isLocalPlayer) {
             Debug.Log($"{gameObject.name} : not Local Player"); 
             return;
         }
         
-        if (player.isFixed) {
+        if (player.IsFixed) {
             return;
         }
 
-        if (player.Cam == null) {
+        if (playerCam == null) {
             Debug.Log($"{gameObject.name} : Cam is Null");
             return;
         }
@@ -64,7 +83,7 @@ public class PlayerMovement : NetworkBehaviour
 
         Vector3 currentPos = CollideAndSlideMove(moveDir);
 
-        bool isTurnable = moveDir.sqrMagnitude > 0.0001f && !player.IsTransformed();
+        bool isTurnable = moveDir.sqrMagnitude > 0.0001f && !player.IsTransformed;
 
         if (isTurnable)
         {   
@@ -78,19 +97,6 @@ public class PlayerMovement : NetworkBehaviour
         // }
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        name = "Player"+Time.time;
-        PlayerInput input = GetComponent<PlayerInput>();
-
-        input.enabled = true;
-
-        input.ActivateInput();
-
-        this.enabled = true;
-    }
-
-
     public void TurnLookWay(Vector3 moveDir, float turnSpeed) {
         Quaternion targetRot = Quaternion.LookRotation(moveDir, Vector3.up);
 
@@ -103,8 +109,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private Vector3 GetMoveDir() {
         Vector3 moveDir =
-            player.Cam.transform.right * inputVec.x +
-            player.Cam.transform.forward * inputVec.y;
+            playerCam.transform.right * inputVec.x +
+            playerCam.transform.forward * inputVec.y;
 
         moveDir.y = 0f;
         if (moveDir.sqrMagnitude < 0.0001f)
@@ -156,6 +162,20 @@ public class PlayerMovement : NetworkBehaviour
         return currentPos;
     }
 
+
+// mirror callbacks
+    public override void OnStartLocalPlayer()
+    {
+        name = "Player"+Time.time;
+        PlayerInput input = GetComponent<PlayerInput>();
+
+        input.enabled = true;
+
+        input.ActivateInput();
+
+        this.enabled = true;
+    }
+
 /*-------------------PlayerInput Callbacks---------------------*/
     
     public void OnMove(InputAction.CallbackContext context) {
@@ -165,15 +185,11 @@ public class PlayerMovement : NetworkBehaviour
 
     public void OnSprint(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
-        bool isPress = context.ReadValue<float>() > 0.5f;        
-        nowSpeed = isPress ? sprintSpeed : walkSpeed;
-        player.IsRunning = isPress;
+        bool isRunning = context.ReadValue<float>() > 0.5f;        
+        player.CmdSetRunning(isRunning);
     }
 
-    [Command]
-    private void CmdSetRunning(bool newValue) {
-        player.IsRunning = newValue;
-    }
+    
 
     public void OnJump(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
@@ -188,9 +204,9 @@ public class PlayerMovement : NetworkBehaviour
     public void OnFix(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
 
-        if (!player.IsTransformed()) return; 
+        if (!player.IsTransformed) return; 
         if (context.started) {
-            player.CmdRequestFix(!player.isFixed);
+            player.CmdRequestFix(!player.IsFixed);
         }
     }
 }
