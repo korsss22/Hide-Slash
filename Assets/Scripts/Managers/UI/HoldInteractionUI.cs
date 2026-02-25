@@ -14,7 +14,6 @@ public class HoldInteractionUI : MonoBehaviour
     private void Awake()
     {
         holdCircle = GetComponent<Image>();
-        gameObject.SetActive(false);
     }
 
     void Update()
