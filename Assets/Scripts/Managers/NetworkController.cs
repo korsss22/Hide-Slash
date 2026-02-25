@@ -158,7 +158,6 @@ public class NetworkController : Singleton<NetworkController>
             return;
         }
         lobby.Refresh();
-        Debug.Log("OnLobbyEntered");
         OnLobbyEnter?.Invoke();
         
         string gameId = lobby.GetData(HOST_ADDRESS);
@@ -166,7 +165,6 @@ public class NetworkController : Singleton<NetworkController>
         if (gameId == null) return;
 
         if (gameId == SteamClient.SteamId.ToString()) { //host
-            Debug.Log("Its host. StartHost");
             manager.StartHost();
         } else {
             manager.networkAddress = gameId;

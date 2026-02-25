@@ -6,7 +6,7 @@ using Mirror;
 public class PlayerMovement : NetworkBehaviour
 {
 // fields
-    private Player player;
+    private Player Player;
     private Camera playerCam;
     private Vector2 inputVec;
     private Vector3 moveVec;
@@ -41,7 +41,7 @@ public class PlayerMovement : NetworkBehaviour
     [Client]
     private void FixedUpdate()
     {
-        if (player == null) {
+        if (Player == null) {
             Debug.LogError("player is not registered yet");
             return;
         }
@@ -50,9 +50,15 @@ public class PlayerMovement : NetworkBehaviour
     
 // Events
     public void RegisterEvent(Player player) {
-        this.player = player;
-        player.OnFixChanged += OnFixed;
-        player.OnRunningChanged += OnRunning;
+        this.Player = player;
+        
+        Player.OnFixChanged += OnFixed;
+        Player.OnRunningChanged += OnRunning;
+    }
+
+    public void UnRegisterEvent() {
+        Player.OnFixChanged -= OnFixed;
+        Player.OnRunningChanged -= OnRunning;
     }
 
     private void OnFixed(bool oldValue, bool newValue) {
@@ -70,7 +76,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
         
-        if (player.IsFixed) {
+        if (Player.IsFixed) {
             return;
         }
 
@@ -83,7 +89,7 @@ public class PlayerMovement : NetworkBehaviour
 
         Vector3 currentPos = CollideAndSlideMove(moveDir);
 
-        bool isTurnable = moveDir.sqrMagnitude > 0.0001f && !player.IsTransformed;
+        bool isTurnable = moveDir.sqrMagnitude > 0.0001f && !Player.IsTransformed;
 
         if (isTurnable)
         {   
@@ -186,7 +192,7 @@ public class PlayerMovement : NetworkBehaviour
     public void OnSprint(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
         bool isRunning = context.ReadValue<float>() > 0.5f;        
-        player.CmdSetRunning(isRunning);
+        Player.CmdSetRunning(isRunning);
     }
 
     
@@ -204,9 +210,9 @@ public class PlayerMovement : NetworkBehaviour
     public void OnFix(InputAction.CallbackContext context) {
         if (!isLocalPlayer) return;
 
-        if (!player.IsTransformed) return; 
+        if (!Player.IsTransformed) return; 
         if (context.started) {
-            player.CmdRequestFix(!player.IsFixed);
+            Player.CmdRequestFix(!Player.IsFixed);
         }
     }
 }

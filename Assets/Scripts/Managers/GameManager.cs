@@ -54,8 +54,6 @@ public class GameManager : Singleton<GameManager>
     private void EnterPlayMode() {
         EnterGameState(GameState.PLAYING);
         EnterLockState(LockState.LOCKED);
-        
-        Debug.Log("Entering Lock State");
     }
 
     private void TurnPlayerUIOn(Player player) {

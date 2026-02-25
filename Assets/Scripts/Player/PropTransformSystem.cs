@@ -27,7 +27,11 @@ public class PropTransformSystem : MonoBehaviour
 // Events
     public void RegisterEvent(Player player) {
         this.Player = player;
-        player.OnTransformChanged += OnTransform;
+        Player.OnTransformChanged += OnTransform;
+    }
+
+    public void UnRegisterEvent() {
+        Player.OnTransformChanged -= OnTransform;
     }
 
     private void OnTransform(int oldValue, int newValue) {
@@ -131,8 +135,6 @@ public class PropTransformSystem : MonoBehaviour
         if (!Player.IsTransformed) {
             if (nearestObj == null) {
                 return;
-            } else {
-                Debug.Log("Transforming...");
             }
         }
 

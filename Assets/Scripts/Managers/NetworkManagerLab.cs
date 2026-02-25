@@ -11,7 +11,6 @@ public class NetworkManagerLab : NetworkManager
         base.OnStartClient();
 
         string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log(sceneName);
         switch (sceneName)
         {
             case "Map":

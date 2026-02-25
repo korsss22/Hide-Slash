@@ -8,7 +8,7 @@ using System;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerCamera : NetworkBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] private Player Player;
     private Transform cineMachine;
     private CinemachineCamera virtualCamera;
     private CinemachineOrbitalFollow orbitCam;
@@ -27,12 +27,18 @@ public class PlayerCamera : NetworkBehaviour
     private Coroutine FOVCoroutine;
 
     void Awake() {
-        if (player == null) player = GetComponent<Player>();
+        if (Player == null) Player = GetComponent<Player>();
         nowDis = defaultDistance;
     }
 
     public void RegisterEvent(Player player) {
-        player.OnRunningChanged += ChangeRunningFOV;
+        this.Player = player;
+        
+        Player.OnRunningChanged += ChangeRunningFOV;
+    }
+
+    public void UnRegisterEvent() {
+        Player.OnRunningChanged -= ChangeRunningFOV;
     }
 
     private IEnumerator ChangeFOV(float target) {
@@ -108,9 +114,9 @@ public class PlayerCamera : NetworkBehaviour
         Vector2 mouse = context.ReadValue<Vector2>();
         yaw += mouse.x * sensitivity;
 
-        if (player.IsFixed) return;
+        if (Player.IsFixed) return;
         if (Input.GetKey(KeyCode.LeftAlt)) {
-            player.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
+            Player.transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
         }
     }
 }

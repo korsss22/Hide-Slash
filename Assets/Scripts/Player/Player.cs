@@ -72,4 +72,10 @@ public class Player : NetworkBehaviour
 
         GameManager.Instance.OnLocalPlayerSpawned?.Invoke(this);
     }
+
+    private void OnDestroy() {
+        playerCamera.UnRegisterEvent();
+        playerMovement.UnRegisterEvent();
+        transformSystem.UnRegisterEvent();
+    }
 }
