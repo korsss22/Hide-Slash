@@ -31,6 +31,11 @@ public class Player : NetworkBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerCamera = GetComponent<PlayerCamera>();
         transformSystem = GetComponentInChildren<PropTransformSystem>();
+
+        playerCamera.RegisterEvent(this);
+        playerMovement.RegisterEvent(this);
+        transformSystem.RegisterEvent(this);
+
     }
 
 // command
@@ -66,9 +71,6 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         this.enabled = true;
-        playerCamera.RegisterEvent(this);
-        playerMovement.RegisterEvent(this);
-        transformSystem.RegisterEvent(this);
 
         GameManager.Instance.OnLocalPlayerSpawned?.Invoke(this);
     }

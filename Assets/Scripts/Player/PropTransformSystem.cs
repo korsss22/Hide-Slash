@@ -27,6 +27,7 @@ public class PropTransformSystem : MonoBehaviour
 // Events
     public void RegisterEvent(Player player) {
         this.Player = player;
+        Debug.Log("RegisteredEvent on transformSystem!");
         Player.OnTransformChanged += OnTransform;
     }
 
@@ -35,6 +36,8 @@ public class PropTransformSystem : MonoBehaviour
     }
 
     private void OnTransform(int oldValue, int newValue) {
+        Debug.Log("OnTransform Performed!");
+        
         if (newValue == -1) {
             Revert();
         } else {
