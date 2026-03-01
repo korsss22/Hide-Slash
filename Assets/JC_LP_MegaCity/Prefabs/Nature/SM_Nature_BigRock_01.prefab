@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 1050779643662221185}
   - component: {fileID: 5405885521333687320}
   - component: {fileID: 6179719144537863772}
-  - component: {fileID: 7115628736586033081}
   - component: {fileID: -2977158816109804274}
+  - component: {fileID: 3954773443305030196}
   m_Layer: 6
   m_Name: SM_Nature_BigRock_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 18
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1050779643662221185
 Transform:
@@ -88,8 +88,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7115628736586033081
-MeshCollider:
+--- !u!114 &-2977158816109804274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191596062494369120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a39f945648c2b4281f88b8b969f8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propID: 229
+--- !u!65 &3954773443305030196
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,20 +119,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4321219843973573357, guid: f38b665896be50b47996f24d83a29637, type: 3}
---- !u!114 &-2977158816109804274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7191596062494369120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a39f945648c2b4281f88b8b969f8a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propID: 229
+  serializedVersion: 3
+  m_Size: {x: 9.301316, y: 6.900255, z: 8.911116}
+  m_Center: {x: -0.23817492, y: 0.7784947, z: -0.20247436}

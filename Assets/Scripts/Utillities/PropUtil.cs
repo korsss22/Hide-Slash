@@ -46,4 +46,16 @@ public static class PropUtil
                 col.enabled = enabled;
         }
     }
+
+    public static void SetAllChildRigidbodies(GameObject root, bool enabled)
+    {
+        if (root == null) return;
+
+        Rigidbody[] rigidbodies = root.GetComponentsInChildren<Rigidbody>(true);
+        foreach (var rb in rigidbodies)
+        {
+            if (rb != null)
+                rb.isKinematic = !enabled;
+        }
+    }
 }

@@ -104,6 +104,7 @@ public class PropTransformSystem : MonoBehaviour
         PropUtil.SetPropLayerInChildren(transformedObj, LayerMask.NameToLayer("Prop"));
 
         PropUtil.SetAllChildColliders(transformedObj, false);
+        PropUtil.SetAllChildRigidbodies(transformedObj, false);
         transformedObj.transform.localPosition = Vector3.zero;
     }
 
