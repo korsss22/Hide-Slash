@@ -539,6 +539,7 @@ GameObject:
   - component: {fileID: 8641762789907819450}
   - component: {fileID: 4637386185355014359}
   - component: {fileID: 8217318246630048316}
+  - component: {fileID: 3642113777081714975}
   - component: {fileID: 3910989283073555867}
   - component: {fileID: 8367952080534893590}
   - component: {fileID: 8027713189490750121}
@@ -758,6 +759,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 562f02ca-650d-458b-bef7-dc5bbd7287d9
     m_ActionName: Player/Fix
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3642113777081714975}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: OnPush
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1adec797-c5ac-46a4-bad2-8fd550200da4
+    m_ActionName: 'Player/Push[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: 
@@ -820,7 +837,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  player: {fileID: 8641762789907819450}
+  Player: {fileID: 0}
   camPivot: {fileID: 2009376710413751154}
   minDistance: 2
   maxDistance: 15
@@ -828,6 +845,24 @@ MonoBehaviour:
   sensitivity: 1
   walkFOV: 60
   runFOV: 90
+--- !u!114 &3642113777081714975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822470659753831373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8253cd86f7b6f3942ace3d053d86c95d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushableLayer:
+    serializedVersion: 2
+    m_Bits: 704
+  checkBoxCenter: {x: 0, y: 1, z: 1.5}
+  checkBoxHalfExtents: {x: 1, y: 1, z: 1.5}
+  pushPower: 10
 --- !u!54 &3910989283073555867
 Rigidbody:
   m_ObjectHideFlags: 0
