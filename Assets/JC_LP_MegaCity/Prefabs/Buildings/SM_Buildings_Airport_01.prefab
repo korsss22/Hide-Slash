@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 397773241779827930}
   - component: {fileID: 2380281205440899048}
   - component: {fileID: 1088489167315019260}
-  - component: {fileID: 968226029138844307}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_L_04
   m_TagString: Untagged
@@ -88,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &968226029138844307
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637273898643125159}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.2428582, z: 0.09442547}
-  m_Center: {x: 0.5303694, y: 1.1691612, z: -0.000019030645}
 --- !u!1 &2204639428341209539
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +98,6 @@ GameObject:
   - component: {fileID: 6222691616089446320}
   - component: {fileID: 7352808432727336531}
   - component: {fileID: 282448709017243584}
-  - component: {fileID: 999830434806506666}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_R_02
   m_TagString: Untagged
@@ -197,27 +174,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &999830434806506666
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2204639428341209539}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.242858, z: 0.09442547}
-  m_Center: {x: -0.53035605, y: 1.1691928, z: -0.000069251284}
 --- !u!1 &3889743278116792393
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +185,6 @@ GameObject:
   - component: {fileID: 3328626940071493960}
   - component: {fileID: 2049454126346203980}
   - component: {fileID: 4829163915427569751}
-  - component: {fileID: 7532252289224125695}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01
   m_TagString: Untagged
@@ -258,6 +213,7 @@ Transform:
   - {fileID: 6222691616089446320}
   - {fileID: 3405515368099009049}
   - {fileID: 7326660693284091171}
+  - {fileID: 1835515275112775423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2049454126346203980
@@ -315,13 +271,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7532252289224125695
+--- !u!1 &4025956206977878685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8154733841303520300}
+  - component: {fileID: 4224753710774532828}
+  m_Layer: 0
+  m_Name: LeftPillar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8154733841303520300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4025956206977878685}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835515275112775423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4224753710774532828
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3889743278116792393}
+  m_GameObject: {fileID: 4025956206977878685}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -334,8 +322,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 41.637245, y: 25.880579, z: 47.762825}
-  m_Center: {x: 0.000002861023, y: 12.933778, z: 3.1954966}
+  m_Size: {x: 0.9, y: 23.27, z: 41.15}
+  m_Center: {x: 20.39, y: 11.6, z: 0}
 --- !u!1 &4099182247081563290
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +335,6 @@ GameObject:
   - component: {fileID: 7659435558152117883}
   - component: {fileID: 2783586816903581628}
   - component: {fileID: 738647361914122281}
-  - component: {fileID: 1868348446456237037}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_L_01
   m_TagString: Untagged
@@ -424,27 +411,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1868348446456237037
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4099182247081563290}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.2428582, z: 0.09442547}
-  m_Center: {x: 0.5303694, y: 1.1691612, z: -0.000019030645}
 --- !u!1 &5075052715317623674
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +422,6 @@ GameObject:
   - component: {fileID: 4277542559839824049}
   - component: {fileID: 4696024749631879765}
   - component: {fileID: 5679827395290263079}
-  - component: {fileID: 6193689832421941871}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_R_01
   m_TagString: Untagged
@@ -533,13 +498,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6193689832421941871
+--- !u!1 &5654425844401383889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6603380101054587629}
+  - component: {fileID: 5395530592718496952}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6603380101054587629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654425844401383889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835515275112775423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5395530592718496952
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5075052715317623674}
+  m_GameObject: {fileID: 5654425844401383889}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -552,8 +549,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.242858, z: 0.09442547}
-  m_Center: {x: -0.53035605, y: 1.1691928, z: -0.000069251284}
+  m_Size: {x: 40, y: 24, z: 33.942112}
+  m_Center: {x: 0, y: 12, z: 1.0460529}
 --- !u!1 &5834498629145593177
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +562,6 @@ GameObject:
   - component: {fileID: 5479731623677665967}
   - component: {fileID: 8020449639800380425}
   - component: {fileID: 1511427051164811151}
-  - component: {fileID: 3866458013787881468}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_L_02
   m_TagString: Untagged
@@ -642,13 +638,80 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3866458013787881468
+--- !u!1 &5856514477769042116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1835515275112775423}
+  m_Layer: 0
+  m_Name: Colliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1835515275112775423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856514477769042116}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8154733841303520300}
+  - {fileID: 4051529794241716585}
+  - {fileID: 6603380101054587629}
+  - {fileID: 5045533759002530866}
+  m_Father: {fileID: 3328626940071493960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6411684901990451793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4051529794241716585}
+  - component: {fileID: 5282434000569012230}
+  m_Layer: 0
+  m_Name: RightPillar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4051529794241716585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411684901990451793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835515275112775423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5282434000569012230
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5834498629145593177}
+  m_GameObject: {fileID: 6411684901990451793}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -661,8 +724,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.2428582, z: 0.09442547}
-  m_Center: {x: 0.5303694, y: 1.1691612, z: -0.000019030645}
+  m_Size: {x: 0.9, y: 23.27, z: 41.15}
+  m_Center: {x: -20.39, y: 11.6, z: 0}
 --- !u!1 &6574925339182758765
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +737,6 @@ GameObject:
   - component: {fileID: 4951099640269174673}
   - component: {fileID: 2649125561213287119}
   - component: {fileID: 7164839897942105710}
-  - component: {fileID: 2716847834956458189}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_L_03
   m_TagString: Untagged
@@ -751,13 +813,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2716847834956458189
+--- !u!1 &8419329828055862584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5045533759002530866}
+  - component: {fileID: 6931224065968558499}
+  m_Layer: 0
+  m_Name: CenterPillar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5045533759002530866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419329828055862584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835515275112775423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6931224065968558499
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6574925339182758765}
+  m_GameObject: {fileID: 8419329828055862584}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -770,8 +864,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.2428582, z: 0.09442547}
-  m_Center: {x: 0.5303694, y: 1.1691612, z: -0.000019030645}
+  m_Size: {x: 13.6, y: 24, z: 6.5408173}
+  m_Center: {x: 0, y: 12, z: 18.499592}
 --- !u!1 &8528642718464475609
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +877,6 @@ GameObject:
   - component: {fileID: 3405515368099009049}
   - component: {fileID: 595931362876565106}
   - component: {fileID: 8336099891110866649}
-  - component: {fileID: 1500457845538386091}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_R_03
   m_TagString: Untagged
@@ -860,27 +953,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1500457845538386091
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8528642718464475609}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.242858, z: 0.09442547}
-  m_Center: {x: -0.53035605, y: 1.1691928, z: -0.000069251284}
 --- !u!1 &9102982945591644407
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +964,6 @@ GameObject:
   - component: {fileID: 7326660693284091171}
   - component: {fileID: 5863031523409470639}
   - component: {fileID: 5954204983478569080}
-  - component: {fileID: 8978094171809272436}
   m_Layer: 8
   m_Name: SM_Buildings_Airport_01_Door_R_04
   m_TagString: Untagged
@@ -969,24 +1040,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8978094171809272436
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9102982945591644407}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0606718, y: 2.242858, z: 0.09442547}
-  m_Center: {x: -0.53035605, y: 1.1691928, z: -0.000069251284}

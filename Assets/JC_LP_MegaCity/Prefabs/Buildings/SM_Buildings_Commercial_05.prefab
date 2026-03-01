@@ -108,8 +108,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.1, y: 7.700003, z: 9.400003}
-  m_Center: {x: 0, y: 3.8499997, z: 0.19999838}
+  m_Size: {x: 7.045065, y: 7.700003, z: 8.837928}
+  m_Center: {x: -0.04823017, y: 3.8499997, z: -0.08103895}
 --- !u!1 &7799373880330952987
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 3189115922587610491}
   - component: {fileID: 8817757105363001335}
   - component: {fileID: 5803086176419119358}
-  - component: {fileID: 8591735288815992238}
   m_Layer: 8
   m_Name: SM_Buildings_Commercial_Door_01
   m_TagString: Untagged
@@ -198,24 +197,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8591735288815992238
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7799373880330952987}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0750012, y: 1.9938269, z: 0.15}
-  m_Center: {x: -0.5375006, y: 0.99691343, z: -0.029855516}

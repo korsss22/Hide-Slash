@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8597750126432784411}
   - component: {fileID: 5928734939830415236}
   - component: {fileID: -4979596196904843251}
+  - component: {fileID: 8360198978559676448}
   m_Layer: 8
   m_Name: SM_Buildings_Commercial_10
   m_TagString: Untagged
@@ -108,8 +109,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.450687, y: 3.893831, z: 6.5747705}
-  m_Center: {x: -0.7746563, y: 1.9469136, z: 0.46261477}
+  m_Size: {x: 8.450687, y: 3.893831, z: 4.6063995}
+  m_Center: {x: -0.7746563, y: 1.9469136, z: -0.52157074}
+--- !u!65 &8360198978559676448
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907271064073664991}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.9088006, y: 3.893831, z: 1.9500003}
+  m_Center: {x: -1.8805454, y: 1.9469136, z: 2.74}
 --- !u!1 &2500833987406467423
 GameObject:
   m_ObjectHideFlags: 0

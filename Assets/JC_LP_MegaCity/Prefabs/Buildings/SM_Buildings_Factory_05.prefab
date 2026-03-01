@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7221463101255559451}
   - component: {fileID: 4906140839416603549}
   - component: {fileID: 2686514536440969855}
+  - component: {fileID: 5591286633523070124}
   m_Layer: 8
   m_Name: SM_Buildings_Factory_05
   m_TagString: Untagged
@@ -106,5 +107,26 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.9753885, y: 27.083925, z: 10.301767}
-  m_Center: {x: 0, y: 13.541963, z: 2.0094361}
+  m_Size: {x: 5.9753885, y: 27.083925, z: 5.688057}
+  m_Center: {x: 0, y: 13.541963, z: 0.24375904}
+--- !u!65 &5591286633523070124
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841141270634091853}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3, y: 14.381044, z: 2.200725}
+  m_Center: {x: 0, y: 7.1905203, z: 6.0599566}

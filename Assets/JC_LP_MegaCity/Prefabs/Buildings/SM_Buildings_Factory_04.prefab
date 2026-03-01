@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 253779079866043207}
   - component: {fileID: 3336392342380487623}
   - component: {fileID: 2419322412885000940}
-  - component: {fileID: 6797368485762103433}
+  - component: {fileID: 617798205282153564}
   m_Layer: 8
   m_Name: SM_Buildings_Factory_04
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6797368485762103433
-BoxCollider:
+--- !u!136 &617798205282153564
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,6 +105,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15.0745945, y: 21.031595, z: 13.662543}
-  m_Center: {x: -0.6693566, y: 10.515798, z: -0.0017762184}
+  serializedVersion: 2
+  m_Radius: 6.46
+  m_Height: 37.36
+  m_Direction: 1
+  m_Center: {x: 0, y: 3.6, z: 0.23}
