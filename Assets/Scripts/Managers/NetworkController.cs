@@ -22,7 +22,7 @@ public class NetworkController : Singleton<NetworkController>
     private NetworkManager manager;
     private FizzyFacepunch fizzy;
     private const string HOST_ADDRESS = "hostAddress";
-    private Lobby? currentLobby;
+    public Lobby? CurrentLobby {get; private set;}
     [SerializeField] private TransportType transportType;
     private Action<string> onStartClient;
     public Action OnRequestLobby;
@@ -119,9 +119,9 @@ public class NetworkController : Singleton<NetworkController>
 /*--------------------------SteamCallbacks----------------------------*/
 
     public async void CreateLobby(string lobbyName, string password, int maxPlayer, LobbyType lobbyType) {
-        currentLobby = await SteamMatchmaking.CreateLobbyAsync(maxPlayer);
+        CurrentLobby = await SteamMatchmaking.CreateLobbyAsync(maxPlayer);
 
-        if (!currentLobby.HasValue) {
+        if (!CurrentLobby.HasValue) {
             UIManager.PrintUI(DEBUG_TYPE.ERROR, "failed to create lobby...");
             return;
         }
@@ -129,25 +129,25 @@ public class NetworkController : Singleton<NetworkController>
         switch (lobbyType)
         {
             case LobbyType.Public:
-                currentLobby?.SetPublic();
+                CurrentLobby?.SetPublic();
                 break;
             case LobbyType.FriendsOnly:
-                currentLobby?.SetFriendsOnly();
+                CurrentLobby?.SetFriendsOnly();
                 break;
             case LobbyType.InviteOnly:
-                currentLobby?.SetPrivate();
+                CurrentLobby?.SetPrivate();
                 break;
             default:
-                currentLobby?.SetPublic();
+                CurrentLobby?.SetPublic();
                 break;
         }
 
-        currentLobby?.SetJoinable(true);
+        CurrentLobby?.SetJoinable(true);
 
-        currentLobby?.SetData("LobbyName", lobbyName);
-        currentLobby?.SetData("Password", password);
-        currentLobby?.SetData("MaxPlayer", maxPlayer.ToString());
-        currentLobby?.SetData(HOST_ADDRESS, SteamClient.SteamId.ToString());
+        CurrentLobby?.SetData("LobbyName", lobbyName);
+        CurrentLobby?.SetData("Password", password);
+        CurrentLobby?.SetData("MaxPlayer", maxPlayer.ToString());
+        CurrentLobby?.SetData(HOST_ADDRESS, SteamClient.SteamId.ToString());
     }
 
     private void OnLobbyEntered(Lobby lobby)
@@ -163,6 +163,8 @@ public class NetworkController : Singleton<NetworkController>
         string gameId = lobby.GetData(HOST_ADDRESS);
 
         if (gameId == null) return;
+
+
 
         if (gameId == SteamClient.SteamId.ToString()) { //host
             manager.StartHost();

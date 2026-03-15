@@ -12,20 +12,23 @@ public class LobbyInfoInputfield : MonoBehaviour
     [SerializeField] private ToggleGroup lobbyTypeToggle;
 
     public void CreateLobby() {   
-        GetValues(out string lobbyName, out string password, out int maxPlayerIndex, out LobbyType lobbyType);
+        GetValues(out string lobbyName, out string password, out string maxPlayer, out LobbyType lobbyType);
 
-        if (!CheckInputValid(lobbyName, maxPlayerIndex)) return;
+        if (!CheckInputValid(lobbyName, maxPlayer)) return;
         if (!SteamClient.IsValid) {
             UIManager.PrintUI(DEBUG_TYPE.ERROR, "SteamClient is not valid...");
             return;
         }
-        NetworkController.Instance.CreateLobby(lobbyName, password, maxPlayerIndex, lobbyType);
+        int.TryParse(maxPlayer, out int maxPlayer_int);
+        NetworkController.Instance.CreateLobby(lobbyName, password, maxPlayer_int, lobbyType);
     }
 
-    private void GetValues(out string lobbyName, out string password, out int maxPlayerIndex, out LobbyType lobbyType) {
+    private void GetValues(out string lobbyName, out string password, out string maxPlayer, out LobbyType lobbyType) {
         lobbyName = lobbyNameField.text;
         password = passwordField.text;
-        maxPlayerIndex = maxPlayerDropdown.value;
+        maxPlayer = maxPlayerDropdown.options[maxPlayerDropdown.value].text;
+        
+        Debug.Log(maxPlayer);
 
         Toggle activeToggle = lobbyTypeToggle.GetFirstActiveToggle();
 
@@ -38,7 +41,7 @@ public class LobbyInfoInputfield : MonoBehaviour
         Enum.TryParse(activeToggle.name, true, out lobbyType);
     }
 
-    private bool CheckInputValid(string lobbyName, int maxPlayerIndex) {
+    private bool CheckInputValid(string lobbyName, string maxPlayerIndex) {
         if (string.IsNullOrWhiteSpace(lobbyName)) {
             UIManager.PrintUI(DEBUG_TYPE.ERROR, "Check your lobby name is filled...");
             return false;
