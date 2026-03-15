@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
     public void OnPush(InputAction.CallbackContext context) {
         if (context.started) player.OnPushingObject();
     }
-
+    //TODO : Set isKinematic false when its trying to push.
     private void PushObject() {
         List<NetworkIdentity> identities = CheckPushObjectsIdentity();
         Debug.Log(identities.Count);
