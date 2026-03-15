@@ -24,6 +24,7 @@ public class UIUtils : Singleton<UIUtils>
     [SerializeField] private DebugConsole DebugConsole = null; 
     [SerializeField] private PausePanel PausePanel = null;   
     [SerializeField] private HoldInteractionUI HoldInteractionUI = null;
+    [SerializeField] private LoadingUI LoadingUI = null;
     private Transform canvasTransform;
 
     override protected void Awake() {
@@ -44,11 +45,17 @@ public class UIUtils : Singleton<UIUtils>
             return;
         }
 
+        if (LoadingUI == null) {
+            Debug.LogError("loadingUI Load failed!");
+            return;
+        }
+
         canvasTransform = transform.GetComponentInChildren<Canvas>(true).transform;
     }
 
     void Start()
     {
+        StartCoroutine(LoadingUI.ShowLogo());
     }
 
     private void Update() {
