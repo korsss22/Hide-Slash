@@ -1,11 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using Mirror;
 using UnityEngine;
 
 public enum GameState {
     MAIN_MENU,
-    PLAYING
+    WAITING_PLAYER,
+    PLAYING,
+    ENDING
 }
 
 public enum LockState {
@@ -23,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     };
     private Stack<LockState> mouseLockStack = new();
     [SerializeField] PropDatabase database;
-    
+
     public bool IsMouseLocked { 
         get {
             if (CurrentLockState == LockState.LOCKED) return true;
@@ -31,8 +34,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public Action OnLobbyWaitingStart;
     public Action OnGameStart;
-    public Action OnGamePlaying;
     public Action OnGameEnd;
     public Action<Player> OnLocalPlayerSpawned;
 
@@ -43,16 +46,16 @@ public class GameManager : Singleton<GameManager>
         EnterGameState(GameState.MAIN_MENU);
         EnterLockState(LockState.UNLOCKED);
 
-        OnGameStart += EnterPlayMode;
+        OnLobbyWaitingStart += EnterPlayMode;
         OnLocalPlayerSpawned += TurnPlayerUIOn;
     }
 
-    public void GameStart() {
-        OnGameStart?.Invoke();
+    public void StartLobbyWaiting() {
+        OnLobbyWaitingStart?.Invoke();
     }
 
     private void EnterPlayMode() {
-        EnterGameState(GameState.PLAYING);
+        EnterGameState(GameState.WAITING_PLAYER);
         EnterLockState(LockState.LOCKED);
     }
 
@@ -89,6 +92,6 @@ public class GameManager : Singleton<GameManager>
     }
 
     private void OnDestroy() {
-        OnGameStart -= EnterPlayMode;
+        OnLobbyWaitingStart -= EnterPlayMode;
     }
 }

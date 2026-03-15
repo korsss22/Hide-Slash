@@ -1,9 +1,6 @@
 using UnityEngine;
 using Mirror;
-using System.Collections;
-using System;
 using UnityEngine.SceneManagement;
-
 
 public class NetworkManagerLab : NetworkManager
 {
@@ -14,7 +11,7 @@ public class NetworkManagerLab : NetworkManager
         switch (sceneName)
         {
             case "Map":
-                GameManager.Instance.GameStart();
+                GameManager.Instance.StartLobbyWaiting();
                 break;
             case "MainScene":
                 Debug.Log("leaved game...");
@@ -22,5 +19,11 @@ public class NetworkManagerLab : NetworkManager
             default:
                 break;
         }
+    }
+
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn) {
+        base.OnServerAddPlayer(conn);
+        Debug.Log("Add Player. update Wait UI. Player : "+conn.address);
+        UIManager.Instance.UpdateWaitUI();
     }
 }

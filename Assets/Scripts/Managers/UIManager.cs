@@ -1,5 +1,7 @@
 using System;
 using Mirror;
+using Steamworks.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum DEBUG_TYPE {
@@ -19,6 +21,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private PausePanel PausePanel = null;   
     [SerializeField] private HoldInteractionUI HoldInteractionUI = null;
     [SerializeField] private LoadingUI LoadingUI = null;
+    [SerializeField] private WaitUI WaitUI = null;
     private Transform canvasTransform;
 
     override protected void Awake() {
@@ -44,7 +47,16 @@ public class UIManager : Singleton<UIManager>
             return;
         }
 
+        if (WaitUI == null) {
+            Debug.LogError("WaitUI Load failed!");
+            return;
+        }
+
         canvasTransform = transform.GetComponentInChildren<Canvas>(true).transform;
+    }
+
+    private void OnEnable() {
+        GameManager.Instance.OnLobbyWaitingStart += TurnWaitUIOn;
     }
 
     void Start()
@@ -111,5 +123,27 @@ public class UIManager : Singleton<UIManager>
         GameUI.gameObject.SetActive(true);
         Transform local = NetworkClient.localPlayer.transform;
         if (GameObject.FindGameObjectWithTag("Minimap").TryGetComponent(out Minimap minimap)) minimap.SetTarget(true, local);
+    }
+
+    public void TurnWaitUIOn() {
+        WaitUI.gameObject.SetActive(true);
+    }
+    
+    public void TurnCountdown(bool flag) {
+        if (flag) WaitUI.ShowCountdown();
+        else WaitUI.HideCountdown();
+    }
+
+    public void UpdateWaitUI() {
+        Lobby? lobby = NetworkController.Instance.CurrentLobby;
+
+        string nowPlayer = lobby?.MemberCount.ToString();
+        string maxPlayer = lobby?.GetData("MaxPlayer");
+
+        WaitUI.UpdateConnections(nowPlayer, maxPlayer);
+    }
+
+    public void UpdateCountdown(double remaingTime) {
+        WaitUI.UpdateCountdown(remaingTime);
     }
 }
