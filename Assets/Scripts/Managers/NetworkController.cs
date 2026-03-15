@@ -40,17 +40,17 @@ public class NetworkController : Singleton<NetworkController>
         manager = NetworkManager.singleton;
 
         if (manager == null) {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "NetworkManager is null");
+            UIManager.PrintUI(DEBUG_TYPE.ERROR, "NetworkManager is null");
             return;
         }
         
         if (manager.playerPrefab == null) {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "playerPrefab is null!");
+            UIManager.PrintUI(DEBUG_TYPE.ERROR, "playerPrefab is null!");
             return;
         }
 
         if (!manager.TryGetComponent(out fizzy)) {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "failed to get fizzy...");
+            UIManager.PrintUI(DEBUG_TYPE.ERROR, "failed to get fizzy...");
             return;
         }
 
@@ -88,7 +88,7 @@ public class NetworkController : Singleton<NetworkController>
     }
 
     private async void OnClientButtonClickedWithSteam(string lobbyId) { //when client jump into the lobby by entering lobbyId.
-        UIUtils.PrintUI(DEBUG_TYPE.ALERT, "Entering the lobby...");
+        UIManager.PrintUI(DEBUG_TYPE.ALERT, "Entering the lobby...");
 
         if (!ulong.TryParse(lobbyId, out ulong id)) return;
 
@@ -97,7 +97,7 @@ public class NetworkController : Singleton<NetworkController>
         RoomEnter flag = await lobby.Join();
         
         if (flag != RoomEnter.Success) {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "failed to join lobby...");
+            UIManager.PrintUI(DEBUG_TYPE.ERROR, "failed to join lobby...");
         }
     }
 
@@ -122,7 +122,7 @@ public class NetworkController : Singleton<NetworkController>
         currentLobby = await SteamMatchmaking.CreateLobbyAsync(maxPlayer);
 
         if (!currentLobby.HasValue) {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "failed to create lobby...");
+            UIManager.PrintUI(DEBUG_TYPE.ERROR, "failed to create lobby...");
             return;
         }
 
@@ -178,7 +178,7 @@ public class NetworkController : Singleton<NetworkController>
 
         if (enter != RoomEnter.Success)
         {
-            UIUtils.PrintUI(DEBUG_TYPE.ERROR, "Failed to join lobby");
+            UIManager.PrintUI(DEBUG_TYPE.ERROR, "Failed to join lobby");
         }
     }
 }

@@ -21,7 +21,7 @@ public class PropTransformSystem : MonoBehaviour
 
     [ClientCallback]
     private void Start() {
-        holdUI = UIUtils.GetHoldUI();    
+        holdUI = UIManager.GetHoldUI();    
     }
 
 // Events

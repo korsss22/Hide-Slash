@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     private void TurnPlayerUIOn(Player player) {
-        UIUtils.Instance.TurnGameUIOn();
+        UIManager.Instance.TurnGameUIOn();
     }
 
     public void EnterGameState(GameState nowState) {
