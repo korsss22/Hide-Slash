@@ -52,6 +52,20 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(LoadingUI.ShowLogo());
     }
 
+    private void OnEnable() {
+        GameManager.Instance.OnLocalPlayerSpawned += OnLocalPlayerSpawned;
+    }
+
+    private void OnDisable() {
+        if (GameManager.Instance == null) {
+            GameManager.Instance.OnLocalPlayerSpawned -= OnLocalPlayerSpawned;
+        }
+    }
+
+    private void OnLocalPlayerSpawned(Player player) {
+        TurnGameUIOn();
+    }
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (PausePanel.gameObject.activeSelf) {
@@ -86,13 +100,15 @@ public class UIManager : Singleton<UIManager>
         Instance.PrintInternal(type, content);
     }
 
-    public static void PopUIWithUnlock(GameObject obj, LockState lockState) {
-        GameManager.Instance.EnterLockState(lockState);
+    public static void PopUIWithUnlock(GameObject obj, LockState lockState)
+    {
+        CursorLockManager.Instance.EnterLockState(lockState);
         obj.SetActive(true);
     }
 
-    public static void CloseUIWithLock(GameObject obj) {
-        GameManager.Instance.ExitLockState();
+    public static void CloseUIWithLock(GameObject obj)
+    {
+        CursorLockManager.Instance.ExitLockState();
         obj.SetActive(false);
     }
 

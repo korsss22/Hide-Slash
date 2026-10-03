@@ -19,10 +19,10 @@ public class DebugConsole : MonoBehaviour
         if (debugQueue.Count == 0) {
             gameObject.SetActive(false);
             isShowing = false;
-            GameManager.Instance.ExitLockState();
+            CursorLockManager.Instance.ExitLockState();
             return;
         }
-        GameManager.Instance.EnterLockState(LockState.UNLOCKED);
+        CursorLockManager.Instance.EnterLockState(LockState.UNLOCKED);
         isShowing = true;
 
         DebugData data = debugQueue.Dequeue();
