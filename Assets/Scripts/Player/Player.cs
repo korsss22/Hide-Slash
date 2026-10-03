@@ -98,7 +98,7 @@ public class Player : NetworkBehaviour
     {
         this.enabled = true;
 
-        GameManager.Instance.OnLocalPlayerSpawned?.Invoke(this);
+        GameManager.Instance.NotifyLocalPlayerSpawned(this);
     }
 
     private void OnDestroy() {
